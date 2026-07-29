@@ -1,10 +1,34 @@
 <script lang="ts">
+	import { fade } from 'svelte/transition';
 	import { MSRP, TIERS } from '$lib/content';
-	import switchBlack from '$lib/assets/photos/switch-black-4g.webp';
+	import switchHero from '$lib/assets/photos/switch-white-hero.webp';
 	import switchWhite from '$lib/assets/photos/switch-white-angled.webp';
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
+
+	// Motiva-style scroll sequence — "iotty × ____", ending on trade
+	const CROSS_WORDS = [
+		'design',
+		'install',
+		'smart home',
+		'lighting',
+		'outlets',
+		'builders',
+		'remodelers',
+		'innovation',
+		'trade'
+	];
+	let crossIndex: number = $state(0);
+	let crossWrap: HTMLElement | null = $state(null);
+
+	function onScroll() {
+		if (!crossWrap) return;
+		const total = crossWrap.offsetHeight - window.innerHeight;
+		if (total <= 0) return;
+		const progress = Math.min(1, Math.max(0, -crossWrap.getBoundingClientRect().top / total));
+		crossIndex = Math.min(CROSS_WORDS.length - 1, Math.floor(progress * CROSS_WORDS.length));
+	}
 
 	const segments = [
 		{
@@ -33,6 +57,27 @@
 	];
 </script>
 
+<svelte:window onscroll={onScroll} />
+
+<!-- ============ MOTIVA SCROLL — iotty × ____ ============ -->
+<section bind:this={crossWrap} class="relative" style="height: {CROSS_WORDS.length * 52}vh">
+	<div class="sticky top-0 flex h-screen flex-col items-center justify-center bg-paper px-6">
+		<p class="overline-label mb-8 text-pencil">
+			{String(crossIndex + 1).padStart(2, '0')} / {String(CROSS_WORDS.length).padStart(2, '0')}
+		</p>
+		<h2 class="flex flex-wrap items-baseline justify-center gap-x-5 text-center text-6xl font-semibold tracking-tight sm:text-8xl">
+			<span>iotty</span>
+			<span class="font-mono font-normal text-canvas" aria-hidden="true">×</span>
+			{#key crossIndex}
+				<span in:fade={{ duration: 250 }} class="text-manila-deep">{CROSS_WORDS[crossIndex]}</span>
+			{/key}
+		</h2>
+		<p class="overline-label mt-10 text-pencil/60" class:invisible={crossIndex === CROSS_WORDS.length - 1}>
+			Keep scrolling
+		</p>
+	</div>
+</section>
+
 <!-- ============ HERO ============ -->
 <section class="relative overflow-hidden bg-ink text-paper">
 	<!-- letter-grid backdrop, Motiva-style -->
@@ -49,8 +94,7 @@
 		<div>
 			<p class="overline-label text-manila">The trade program · Founding round</p>
 			<h1 class="mt-6 text-5xl leading-[1.05] font-semibold tracking-tight sm:text-6xl">
-				The switch your clients show&nbsp;off.
-				<span class="text-manila">The program that pays you to install it.</span>
+				The trade program <span class="text-manila">for the glass switch.</span>
 			</h1>
 			<p class="mt-8 max-w-xl text-lg leading-relaxed text-paper/70">
 				Italian tempered glass. Backlit touch. No hub. iotty is opening its US trade channel — and holding
@@ -68,17 +112,17 @@
 				</p>
 			</div>
 		</div>
-		<figure class="frame-motif-light overflow-hidden">
+		<figure class="frame-motif-light max-h-[70vh] overflow-hidden">
 			<img
-				src={switchBlack}
-				alt="iotty 4-gang smart switch in black tempered glass, backlit dimmer sliders glowing white"
+				src={switchHero}
+				alt="iotty 1-gang smart dimmer switch in white tempered glass on a plaster wall, glowing with warm backlight"
 				class="h-full w-full object-cover"
-				width="1600"
-				height="900"
-				fetchpriority="high"
+				width="1000"
+				height="1241"
+				loading="lazy"
 			/>
 			<figcaption class="border-t border-paper/15 px-5 py-3 font-mono text-[0.6875rem] tracking-widest text-paper/50 uppercase">
-				4-gang · black glass · backlit touch
+				1-gang · white glass · backlit touch
 			</figcaption>
 		</figure>
 	</div>
@@ -86,10 +130,10 @@
 
 <!-- ============ WHY / PROGRAM ============ -->
 <section id="program" class="mx-auto max-w-6xl px-6 py-24">
-	<p class="overline-label text-pencil">Why this exists</p>
-	<div class="mt-8 grid gap-12 lg:grid-cols-2">
-		<h2 class="text-3xl leading-snug font-semibold tracking-tight">
-			A $130 switch is a hard sell online — and an easy one in a client's hallway.
+	<div class="grid gap-12 lg:grid-cols-2">
+		<h2 class="text-4xl leading-[1.1] font-semibold tracking-tight">
+			The switch your clients show&nbsp;off.
+			<span class="text-manila-deep">The program that pays you to install it.</span>
 		</h2>
 		<div class="space-y-5 text-[0.95rem] leading-relaxed text-pencil">
 			<p>
@@ -114,8 +158,8 @@
 				src={switchWhite}
 				alt="iotty 4-gang smart switch in white tempered glass, photographed at an angle"
 				class="h-full w-full object-cover"
-				width="1400"
-				height="787"
+				width="1200"
+				height="675"
 				loading="lazy"
 			/>
 		</figure>
