@@ -3,7 +3,14 @@
 	import { fade } from 'svelte/transition';
 	import { MSRP, TIERS } from '$lib/content';
 	import logoBlack from '$lib/assets/iotty-black.svg';
-	import switchHero from '$lib/assets/photos/switch-white-hero.webp';
+	import model1gWhite from '$lib/assets/photos/model-1g-white.webp';
+	import model2gWhite from '$lib/assets/photos/model-2g-white.webp';
+	import model3gWhite from '$lib/assets/photos/model-3g-white.webp';
+	import model4gWhite from '$lib/assets/photos/model-4g-white.webp';
+	import model1gBlack from '$lib/assets/photos/model-1g-black.webp';
+	import model2gBlack from '$lib/assets/photos/model-2g-black.webp';
+	import model3gBlack from '$lib/assets/photos/model-3g-black.webp';
+	import model4gBlack from '$lib/assets/photos/model-4g-black.webp';
 	import switchWhite from '$lib/assets/photos/switch-white-angled.webp';
 	import type { PageData } from './$types';
 
@@ -23,15 +30,36 @@
 	];
 	let crossIndex: number = $state(0);
 
+	// the full line — all 8 models rotate through the hero
+	const MODELS = [
+		{ src: model1gWhite, caption: '1-gang · white glass' },
+		{ src: model2gWhite, caption: '2-gang · white glass' },
+		{ src: model3gWhite, caption: '3-gang · white glass' },
+		{ src: model4gWhite, caption: '4-gang · white glass' },
+		{ src: model1gBlack, caption: '1-gang · black glass' },
+		{ src: model2gBlack, caption: '2-gang · black glass' },
+		{ src: model3gBlack, caption: '3-gang · black glass' },
+		{ src: model4gBlack, caption: '4-gang · black glass' }
+	];
+	let modelIndex: number = $state(0);
+
 	onMount(() => {
-		let t: ReturnType<typeof setTimeout>;
-		const tick = () => {
+		let tWord: ReturnType<typeof setTimeout>;
+		const tickWord = () => {
 			crossIndex = (crossIndex + 1) % CROSS_WORDS.length;
 			// hold longer on the closer — "trade"
-			t = setTimeout(tick, crossIndex === CROSS_WORDS.length - 1 ? 3200 : 1400);
+			tWord = setTimeout(tickWord, crossIndex === CROSS_WORDS.length - 1 ? 3200 : 1400);
 		};
-		t = setTimeout(tick, 1400);
-		return () => clearTimeout(t);
+		tWord = setTimeout(tickWord, 1400);
+
+		const tModel = setInterval(() => {
+			modelIndex = (modelIndex + 1) % MODELS.length;
+		}, 3500);
+
+		return () => {
+			clearTimeout(tWord);
+			clearInterval(tModel);
+		};
 	});
 
 	const segments = [
@@ -62,10 +90,7 @@
 </script>
 
 <!-- ============ MOTIVA SEQUENCE — iotty × ____ (auto) ============ -->
-<section class="flex min-h-[72vh] flex-col items-center justify-center bg-paper px-6">
-	<p class="overline-label mb-8 text-pencil">
-		{String(crossIndex + 1).padStart(2, '0')} / {String(CROSS_WORDS.length).padStart(2, '0')}
-	</p>
+<section class="flex min-h-[38vh] flex-col items-center justify-center bg-paper px-6 py-14">
 	<h2 class="flex flex-wrap items-center justify-center gap-x-6 text-center text-6xl font-semibold tracking-tight sm:text-8xl">
 		<img src={logoBlack} alt="iotty" class="h-12 w-auto sm:h-20" width="111" height="55" />
 		<span class="font-mono font-normal text-canvas" aria-hidden="true">×</span>
@@ -109,17 +134,23 @@
 				</p>
 			</div>
 		</div>
-		<figure class="frame-motif-light max-h-[70vh] overflow-hidden">
-			<img
-				src={switchHero}
-				alt="iotty 1-gang smart dimmer switch in white tempered glass on a plaster wall, glowing with warm backlight"
-				class="h-full w-full object-cover"
-				width="1000"
-				height="1241"
-				loading="lazy"
-			/>
-			<figcaption class="border-t border-paper/15 px-5 py-3 font-mono text-[0.6875rem] tracking-widest text-paper/50 uppercase">
-				1-gang · white glass · backlit touch
+		<figure class="frame-motif-light overflow-hidden">
+			<div class="relative aspect-[4/5] max-h-[62vh] w-full">
+				{#each MODELS as model, i (model.caption)}
+					<img
+						src={model.src}
+						alt="iotty {model.caption} smart switch, backlit on a plaster wall"
+						class="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
+						class:opacity-0={i !== modelIndex}
+						width="1000"
+						height="1250"
+						loading={i === 0 ? 'eager' : 'lazy'}
+					/>
+				{/each}
+			</div>
+			<figcaption class="flex items-center justify-between border-t border-paper/15 px-5 py-3 font-mono text-[0.6875rem] tracking-widest text-paper/50 uppercase">
+				<span>{MODELS[modelIndex].caption} · backlit touch</span>
+				<span class="text-manila/70">{modelIndex + 1} / {MODELS.length}</span>
 			</figcaption>
 		</figure>
 	</div>
