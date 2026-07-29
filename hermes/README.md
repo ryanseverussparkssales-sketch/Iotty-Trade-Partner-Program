@@ -84,12 +84,35 @@ carries the per-metro hints and fit_score bonuses (state tier, Lutron/Caséta/Co
 mentions on the company site, reno-heavy reviews). Update it when new sales data lands;
 collectors read it, nothing else needs to change.
 
+## The VPS engine (leadengine) — LIVE as of 2026-07-29
+
+Prospecting runs on the **leadengine stack** at `/opt/leadengine` on the VPS
+(srv1728993, 2.25.168.99, root + ed25519 key; note: Windows System32 ssh.exe is
+blocked on Ryan's desktop — use Hermes's bundled ssh at
+`C:\Users\Ryan\AppData\Local\hermes\git\usr\bin\ssh.exe`). It shares this same
+Supabase project. Systemd timers run harvester/dispatcher/enrich/watchdog
+continuously; budget-paced (client budget $25/mo).
+
+Configured for iotty:
+
+- Client `iotty` (iotty Trade Partners) with three active campaigns matching
+  `geo-targets.json`: **T1 FL-TX-CA** (12 metros, 250 leads, $8), **T2 highAOV**
+  (9 metros, 150 leads, $5), **T3 outliers** (10 metros, 100 leads, $4).
+- Verticals: electrician, integrator (added to the library 2026-07-29), builder,
+  remodeler, designer.
+- **Promoter**: `promote_iotty_prospects(50)` runs daily at 12:00 UTC (7am CT)
+  via pg_cron (`iotty-promote-prospects`) — moves the top-scored enriched iotty
+  leads into `partners` as `prospect`, mapping vertical→trade, area→state/metro,
+  and adding the state-tier fit bonus. Deduped by email; never touches existing
+  rows. Ops: `leadengine status` / `leadengine campaigns iotty` on the VPS.
+
 ## Daily rhythm (the 50/day loop)
 
-1. Collectors gather ~50 contacts (segment mix: 25 electricians / 15 integrators /
-   5 builders / 5 designers) → `upsert-prospects.mjs`.
-2. Hermes sends the cadence emails for whoever is due (Day 1/5/11/14) → logs each
-   as a `touches` row with `channel='email'`, `agent='hermes'`.
+1. leadengine harvests + enriches within budget (systemd timers, hands-off);
+   the 12:00 UTC promoter feeds up to 50 fresh prospects into `partners`.
+   `upsert-prospects.mjs` remains for manual/side-channel lists.
+2. Email cadence is HELD pending sender-domain decision (see plan §7) — when it
+   turns on, each send logs a `touches` row with `channel='email'`, `agent='hermes'`.
 3. Morning + afternoon: `call-queue.mjs` → Ryan dials → `log-touch.mjs` after each.
 4. Applications land in the same table from the site; approval flips them onto the
    directory. No exports, no syncing, one database.
