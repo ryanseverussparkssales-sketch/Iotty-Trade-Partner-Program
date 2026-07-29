@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { fade } from 'svelte/transition';
+	import { fly } from 'svelte/transition';
 	import { MSRP, TIERS } from '$lib/content';
 	import logoBlack from '$lib/assets/iotty-black.svg';
 	import model1gWhite from '$lib/assets/photos/model-1g-white.webp';
@@ -94,9 +94,17 @@
 	<h2 class="flex flex-wrap items-center justify-center gap-x-6 text-center text-6xl font-semibold tracking-tight sm:text-8xl">
 		<img src={logoBlack} alt="iotty" class="h-12 w-auto sm:h-20" width="111" height="55" />
 		<span class="font-mono font-normal text-canvas" aria-hidden="true">×</span>
-		{#key crossIndex}
-			<span in:fade={{ duration: 300 }} class="text-manila-deep">{CROSS_WORDS[crossIndex]}</span>
-		{/key}
+		<span class="inline-grid overflow-hidden text-left">
+			{#key crossIndex}
+				<span
+					in:fly={{ y: 36, duration: 420, delay: 140 }}
+					out:fly={{ y: -36, duration: 320 }}
+					class="col-start-1 row-start-1 text-manila-deep"
+				>
+					{CROSS_WORDS[crossIndex]}
+				</span>
+			{/key}
+		</span>
 	</h2>
 </section>
 
