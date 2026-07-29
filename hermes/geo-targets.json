@@ -1,0 +1,30 @@
+{
+	"_comment": "Hermes daily collector allocation (50/day) driven by iotty D2C sales data, July 2026. weight = share of daily prospecting. Tier 1 = order volume (proven demand density). Tier 2 = volume + high AOV mix. Tier 3 = high-AOV outliers (multi-gang orders on low volume = whole-home installs already happening — prime integrator signal) plus remaining proven states.",
+	"updated": "2026-07-29",
+	"daily_target": 50,
+	"tiers": [
+		{
+			"tier": 1,
+			"share": 0.5,
+			"states": ["FL", "TX", "CA"],
+			"why": "45% of all D2C orders. FL alone is ~2x CA (448 orders, $136k).",
+			"metros": ["Miami-Fort Lauderdale", "Orlando", "Tampa", "Naples-Fort Myers", "Dallas-Fort Worth", "Houston", "Austin", "Los Angeles", "San Diego", "San Francisco Bay Area"]
+		},
+		{
+			"tier": 2,
+			"share": 0.3,
+			"states": ["NY", "NJ", "IL", "GA", "NC", "AZ", "WA"],
+			"why": "Solid volume; NC ($508 AOV), AZ ($512), IL ($469) show multi-gang project buying.",
+			"metros": ["New York metro (incl. north NJ)", "Chicago", "Atlanta", "Charlotte", "Raleigh-Durham", "Phoenix-Scottsdale", "Seattle"]
+		},
+		{
+			"tier": 3,
+			"share": 0.2,
+			"states": ["AL", "WI", "MO", "PA", "MD", "MI", "NV", "CO"],
+			"why": "AL $943 AOV and WI $737 on tiny volume = whole-home orders already happening — find who's installing them. Rest are proven smaller markets.",
+			"metros": ["Birmingham-Huntsville", "Milwaukee-Madison", "St. Louis", "Philadelphia", "Baltimore-DC suburbs", "Detroit", "Las Vegas", "Denver"]
+		}
+	],
+	"segment_mix_per_day": { "electricians": 25, "integrators": 15, "builders": 5, "designers": 5 },
+	"scoring_hint": "fit_score bonus: +10 state in tier 1, +7 tier 2, +5 tier 3; +10 if company site mentions Lutron/Caseta/Control4 (already sells smart controls); +5 if reviews mention renovation/custom home."
+}

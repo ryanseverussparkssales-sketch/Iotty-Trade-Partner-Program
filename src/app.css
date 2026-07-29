@@ -1,0 +1,47 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/forms';
+
+/*
+	iotty Trade Partners — design tokens
+	Inspiration: Pentagram × Motiva — "sleek, timeless, simple."
+	Black/white core (the two switch finishes), Manila as the single warm
+	accent, Pencil/Canvas grays, monospace letter-grid details.
+*/
+@theme {
+	--color-ink: #0d0d0d; /* near-black — glass switch, black finish */
+	--color-paper: #fafaf8; /* warm white — white finish */
+	--color-manila: #e8d5b5; /* soft warm accent */
+	--color-manila-deep: #c9a96e; /* manila pressed/hover */
+	--color-pencil: #6b6b68; /* mid gray — secondary text */
+	--color-canvas: #e9e7e2; /* light gray — surfaces, rules */
+
+	--font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+	--tracking-wider: 0.12em;
+	--tracking-widest: 0.2em;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	@apply bg-paper text-ink font-sans antialiased;
+}
+
+/* Motiva-style frame motif: sharp outside, one rounded inside corner */
+.frame-motif {
+	border: 1px solid var(--color-ink);
+	border-radius: 0 0 1.25rem 0;
+}
+.frame-motif-light {
+	border: 1px solid color-mix(in srgb, var(--color-paper) 30%, transparent);
+	border-radius: 0 0 1.25rem 0;
+}
+
+/* Monospace overline label — the letter-grid voice */
+.overline-label {
+	@apply font-mono text-[0.6875rem] uppercase;
+	letter-spacing: var(--tracking-widest);
+}
