@@ -96,6 +96,11 @@
 		<img src={logoBlack} alt="iotty" class="h-12 w-auto sm:h-20" width="111" height="55" />
 		<span class="font-mono font-normal text-canvas" aria-hidden="true">×</span>
 		<span class="inline-grid overflow-hidden text-left">
+			<!-- invisible copies of every word lock the container to the longest width,
+			     so the iotty wordmark never shifts as words change -->
+			{#each CROSS_WORDS as w (w)}
+				<span class="invisible col-start-1 row-start-1" aria-hidden="true">{w}</span>
+			{/each}
 			{#key crossIndex}
 				<span
 					in:fly={{ y: 36, duration: 420, delay: 140 }}
