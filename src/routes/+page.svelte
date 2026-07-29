@@ -3,6 +3,7 @@
 	import { fly } from 'svelte/transition';
 	import { MSRP, TIERS } from '$lib/content';
 	import logoBlack from '$lib/assets/iotty-black.svg';
+	// switchWhite (angled) retired — replaced by model shots
 	import model1gWhite from '$lib/assets/photos/model-1g-white.webp';
 	import model2gWhite from '$lib/assets/photos/model-2g-white.webp';
 	import model3gWhite from '$lib/assets/photos/model-3g-white.webp';
@@ -11,7 +12,7 @@
 	import model2gBlack from '$lib/assets/photos/model-2g-black.webp';
 	import model3gBlack from '$lib/assets/photos/model-3g-black.webp';
 	import model4gBlack from '$lib/assets/photos/model-4g-black.webp';
-	import switchWhite from '$lib/assets/photos/switch-white-angled.webp';
+	
 	import type { PageData } from './$types';
 
 	let { data }: { data: PageData } = $props();
@@ -33,12 +34,12 @@
 	// the full line — all 8 models rotate through the hero
 	const MODELS = [
 		{ src: model1gWhite, caption: '1-gang · white glass' },
-		{ src: model2gWhite, caption: '2-gang · white glass' },
-		{ src: model3gWhite, caption: '3-gang · white glass' },
-		{ src: model4gWhite, caption: '4-gang · white glass' },
 		{ src: model1gBlack, caption: '1-gang · black glass' },
+		{ src: model2gWhite, caption: '2-gang · white glass' },
 		{ src: model2gBlack, caption: '2-gang · black glass' },
+		{ src: model3gWhite, caption: '3-gang · white glass' },
 		{ src: model3gBlack, caption: '3-gang · black glass' },
+		{ src: model4gWhite, caption: '4-gang · white glass' },
 		{ src: model4gBlack, caption: '4-gang · black glass' }
 	];
 	let modelIndex: number = $state(0);
@@ -191,11 +192,11 @@
 	<div class="mt-16 grid items-stretch gap-6 lg:grid-cols-[1fr_1.6fr]">
 		<figure class="frame-motif hidden overflow-hidden lg:block">
 			<img
-				src={switchWhite}
-				alt="iotty 4-gang smart switch in white tempered glass, photographed at an angle"
+				src={model4gBlack}
+				alt="iotty 4-gang smart switch in black tempered glass on a limestone wall at dusk"
 				class="h-full w-full object-cover"
-				width="1200"
-				height="675"
+				width="1000"
+				height="1254"
 				loading="lazy"
 			/>
 		</figure>

@@ -27,6 +27,7 @@
 		"vite": "^8.0.16"
 	},
 	"dependencies": {
+		"@supabase/ssr": "^0.12.4",
 		"dotenv": "^17.4.2"
 	}
 }

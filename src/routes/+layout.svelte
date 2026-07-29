@@ -32,6 +32,7 @@
 			<a href="/#math" class="hidden text-sm text-pencil transition-colors hover:text-ink sm:block">The math</a>
 			<a href="/#tiers" class="hidden text-sm text-pencil transition-colors hover:text-ink sm:block">Tiers</a>
 			<a href="/directory" class="hidden text-sm text-pencil transition-colors hover:text-ink sm:block">Directory</a>
+			<a href="/account" class="hidden text-sm text-pencil transition-colors hover:text-ink sm:block">Sign in</a>
 			<a
 				href="/apply"
 				class="frame-motif bg-ink px-5 py-2 text-sm font-medium text-paper transition-colors hover:bg-manila-deep hover:text-ink"
