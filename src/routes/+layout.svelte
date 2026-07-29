@@ -4,6 +4,8 @@
 	import '@fontsource/ibm-plex-mono/400.css';
 	import '@fontsource/ibm-plex-mono/500.css';
 	import favicon from '$lib/assets/favicon.svg';
+	import logoBlack from '$lib/assets/iotty-black.svg';
+	import logoWhite from '$lib/assets/iotty-white.svg';
 	import type { Snippet } from 'svelte';
 	import type { LayoutServerData } from './$types';
 
@@ -21,8 +23,8 @@
 
 <header class="sticky top-0 z-50 border-b border-canvas bg-paper/90 backdrop-blur">
 	<div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-		<a href="/" class="flex items-baseline gap-3">
-			<span class="text-lg font-semibold tracking-tight">iotty</span>
+		<a href="/" class="flex items-center gap-3">
+			<img src={logoBlack} alt="iotty" class="h-5 w-auto" width="111" height="55" />
 			<span class="overline-label text-pencil">Trade Partners</span>
 		</a>
 		<nav class="flex items-center gap-8">
@@ -45,7 +47,10 @@
 <footer class="border-t border-canvas bg-ink text-paper">
 	<div class="mx-auto grid max-w-6xl gap-10 px-6 py-16 sm:grid-cols-3">
 		<div>
-			<p class="text-lg font-semibold">iotty <span class="overline-label ml-2 align-middle text-manila">Trade Partners</span></p>
+			<p class="flex items-center gap-3">
+				<img src={logoWhite} alt="iotty" class="h-6 w-auto" width="111" height="55" />
+				<span class="overline-label text-manila">Trade Partners</span>
+			</p>
 			<p class="mt-3 max-w-xs text-sm leading-relaxed text-paper/60">
 				The Italian tempered-glass smart switch — and the program that pays professionals to install it.
 			</p>

@@ -2,6 +2,7 @@
 	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { MSRP, TIERS } from '$lib/content';
+	import logoBlack from '$lib/assets/iotty-black.svg';
 	import switchHero from '$lib/assets/photos/switch-white-hero.webp';
 	import switchWhite from '$lib/assets/photos/switch-white-angled.webp';
 	import type { PageData } from './$types';
@@ -65,8 +66,8 @@
 	<p class="overline-label mb-8 text-pencil">
 		{String(crossIndex + 1).padStart(2, '0')} / {String(CROSS_WORDS.length).padStart(2, '0')}
 	</p>
-	<h2 class="flex flex-wrap items-baseline justify-center gap-x-5 text-center text-6xl font-semibold tracking-tight sm:text-8xl">
-		<span>iotty</span>
+	<h2 class="flex flex-wrap items-center justify-center gap-x-6 text-center text-6xl font-semibold tracking-tight sm:text-8xl">
+		<img src={logoBlack} alt="iotty" class="h-12 w-auto sm:h-20" width="111" height="55" />
 		<span class="font-mono font-normal text-canvas" aria-hidden="true">×</span>
 		{#key crossIndex}
 			<span in:fade={{ duration: 300 }} class="text-manila-deep">{CROSS_WORDS[crossIndex]}</span>
