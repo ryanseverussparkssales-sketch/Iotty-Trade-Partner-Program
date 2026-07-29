@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
 	import { fade } from 'svelte/transition';
 	import { MSRP, TIERS } from '$lib/content';
 	import switchHero from '$lib/assets/photos/switch-white-hero.webp';
@@ -20,15 +21,17 @@
 		'trade'
 	];
 	let crossIndex: number = $state(0);
-	let crossWrap: HTMLElement | null = $state(null);
 
-	function onScroll() {
-		if (!crossWrap) return;
-		const total = crossWrap.offsetHeight - window.innerHeight;
-		if (total <= 0) return;
-		const progress = Math.min(1, Math.max(0, -crossWrap.getBoundingClientRect().top / total));
-		crossIndex = Math.min(CROSS_WORDS.length - 1, Math.floor(progress * CROSS_WORDS.length));
-	}
+	onMount(() => {
+		let t: ReturnType<typeof setTimeout>;
+		const tick = () => {
+			crossIndex = (crossIndex + 1) % CROSS_WORDS.length;
+			// hold longer on the closer — "trade"
+			t = setTimeout(tick, crossIndex === CROSS_WORDS.length - 1 ? 3200 : 1400);
+		};
+		t = setTimeout(tick, 1400);
+		return () => clearTimeout(t);
+	});
 
 	const segments = [
 		{
@@ -57,25 +60,18 @@
 	];
 </script>
 
-<svelte:window onscroll={onScroll} />
-
-<!-- ============ MOTIVA SCROLL — iotty × ____ ============ -->
-<section bind:this={crossWrap} class="relative" style="height: {CROSS_WORDS.length * 52}vh">
-	<div class="sticky top-0 flex h-screen flex-col items-center justify-center bg-paper px-6">
-		<p class="overline-label mb-8 text-pencil">
-			{String(crossIndex + 1).padStart(2, '0')} / {String(CROSS_WORDS.length).padStart(2, '0')}
-		</p>
-		<h2 class="flex flex-wrap items-baseline justify-center gap-x-5 text-center text-6xl font-semibold tracking-tight sm:text-8xl">
-			<span>iotty</span>
-			<span class="font-mono font-normal text-canvas" aria-hidden="true">×</span>
-			{#key crossIndex}
-				<span in:fade={{ duration: 250 }} class="text-manila-deep">{CROSS_WORDS[crossIndex]}</span>
-			{/key}
-		</h2>
-		<p class="overline-label mt-10 text-pencil/60" class:invisible={crossIndex === CROSS_WORDS.length - 1}>
-			Keep scrolling
-		</p>
-	</div>
+<!-- ============ MOTIVA SEQUENCE — iotty × ____ (auto) ============ -->
+<section class="flex min-h-[72vh] flex-col items-center justify-center bg-paper px-6">
+	<p class="overline-label mb-8 text-pencil">
+		{String(crossIndex + 1).padStart(2, '0')} / {String(CROSS_WORDS.length).padStart(2, '0')}
+	</p>
+	<h2 class="flex flex-wrap items-baseline justify-center gap-x-5 text-center text-6xl font-semibold tracking-tight sm:text-8xl">
+		<span>iotty</span>
+		<span class="font-mono font-normal text-canvas" aria-hidden="true">×</span>
+		{#key crossIndex}
+			<span in:fade={{ duration: 300 }} class="text-manila-deep">{CROSS_WORDS[crossIndex]}</span>
+		{/key}
+	</h2>
 </section>
 
 <!-- ============ HERO ============ -->
