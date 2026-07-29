@@ -92,20 +92,18 @@
 
 <!-- ============ MOTIVA SEQUENCE — iotty × ____ (auto) ============ -->
 <section class="flex min-h-[38vh] flex-col items-center justify-center bg-paper px-6 py-14">
-	<h2 class="flex flex-wrap items-center justify-center gap-x-6 text-center text-6xl font-semibold tracking-tight sm:text-8xl">
-		<img src={logoBlack} alt="iotty" class="h-12 w-auto sm:h-20" width="111" height="55" />
+	<!-- × sits at dead center; logo right-aligns to it, word grows rightward — nothing shifts -->
+	<h2 class="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-x-6 text-6xl font-semibold tracking-tight sm:text-8xl">
+		<span class="flex justify-end">
+			<img src={logoBlack} alt="iotty" class="h-12 w-auto sm:h-20" width="111" height="55" />
+		</span>
 		<span class="font-mono font-normal text-canvas" aria-hidden="true">×</span>
 		<span class="inline-grid overflow-hidden text-left">
-			<!-- invisible copies of every word lock the container to the longest width,
-			     so the iotty wordmark never shifts as words change -->
-			{#each CROSS_WORDS as w (w)}
-				<span class="invisible col-start-1 row-start-1" aria-hidden="true">{w}</span>
-			{/each}
 			{#key crossIndex}
 				<span
 					in:fly={{ y: 36, duration: 420, delay: 140 }}
 					out:fly={{ y: -36, duration: 320 }}
-					class="col-start-1 row-start-1 text-manila-deep"
+					class="col-start-1 row-start-1 whitespace-nowrap text-manila-deep"
 				>
 					{CROSS_WORDS[crossIndex]}
 				</span>
