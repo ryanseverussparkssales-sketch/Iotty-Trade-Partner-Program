@@ -1,9 +1,30 @@
 <script lang="ts">
 	import closerVideo from '$lib/assets/video/iotty-closer.mp4';
 	import closerPoster from '$lib/assets/video/closer-poster.webp';
+	import { MSRP, TIERS } from '$lib/content';
 
 	// Drop the YouTube video ID here (the part after v= or youtu.be/) to go live.
 	const YOUTUBE_ID = 'yztD6529Cr8';
+
+	// ===== tier & cost calculator (public-safe mirror of the admin margin presenter) =====
+	let landedPct: number = $state(30);
+	let tradePct: number = $state(20);
+	let proPct: number = $state(25);
+	let elitePct: number = $state(35);
+
+	const calcTiers = $derived([
+		{ name: 'Trade', discount: tradePct },
+		{ name: 'Pro', discount: proPct },
+		{ name: 'Elite', discount: elitePct }
+	]);
+
+	const money = (n: number) => `$${n.toFixed(2)}`;
+	function partnerCost(msrp: number, discount: number): number {
+		return msrp * (1 - discount / 100);
+	}
+	function partnerMargin(msrp: number, discount: number): number {
+		return msrp - partnerCost(msrp, discount);
+	}
 
 	// ===== the outreach cycle, drawn as a ring =====
 	const CYCLE = [
@@ -91,6 +112,7 @@
 	<!-- jump nav -->
 	<nav class="mt-10 flex flex-wrap gap-2 border-t border-canvas pt-6" aria-label="Jump to section">
 		<a href="#database" class="frame-motif bg-canvas/40 px-4 py-2 text-xs font-medium tracking-wide text-pencil transition-colors hover:bg-canvas hover:text-ink">01 — The database</a>
+		<a href="#calculator" class="frame-motif bg-canvas/40 px-4 py-2 text-xs font-medium tracking-wide text-pencil transition-colors hover:bg-canvas hover:text-ink">Margin calculator</a>
 		<a href="#cycle" class="frame-motif bg-canvas/40 px-4 py-2 text-xs font-medium tracking-wide text-pencil transition-colors hover:bg-canvas hover:text-ink">02 — The cycle</a>
 		<a href="#knowledge-base" class="frame-motif bg-canvas/40 px-4 py-2 text-xs font-medium tracking-wide text-pencil transition-colors hover:bg-canvas hover:text-ink">03 — Knowledge base</a>
 		<a href="#collateral" class="frame-motif bg-canvas/40 px-4 py-2 text-xs font-medium tracking-wide text-pencil transition-colors hover:bg-canvas hover:text-ink">04 — In the field</a>
@@ -169,6 +191,75 @@
 		>
 			See the live directory →
 		</a>
+	</div>
+</section>
+
+<!-- ============ TIER & COST CALCULATOR ============ -->
+<section id="calculator" class="scroll-mt-20 mx-auto max-w-6xl px-6 py-20">
+	<p class="overline-label text-pencil">Try it — the margin math</p>
+	<h2 class="mt-5 max-w-2xl text-3xl font-semibold tracking-tight">Every tier's number, live.</h2>
+	<p class="mt-5 max-w-2xl text-[0.95rem] leading-relaxed text-pencil">
+		Move the sliders — this is the same calculator we use on partner calls, showing partner cost and
+		margin per tier against real MSRP.
+	</p>
+
+	<div class="frame-motif mt-10 bg-ink p-8 text-paper sm:p-10">
+		<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+			<label class="block">
+				<span class="overline-label text-paper/60">Landed cost — {landedPct}% of MSRP</span>
+				<input type="range" min="10" max="60" step="1" bind:value={landedPct} class="mt-3 w-full accent-[#e8d5b5]" />
+			</label>
+			<label class="block">
+				<span class="overline-label text-paper/60">Trade — {tradePct}% off</span>
+				<input type="range" min="10" max="50" step="1" bind:value={tradePct} class="mt-3 w-full accent-[#e8d5b5]" />
+				<span class="mt-1.5 block font-mono text-[0.6875rem] text-paper/40">15% &lt;$500 · 20% $500–1k · 25% &gt;$1k</span>
+			</label>
+			<label class="block">
+				<span class="overline-label text-paper/60">Pro — {proPct}% off</span>
+				<input type="range" min="15" max="55" step="1" bind:value={proPct} class="mt-3 w-full accent-[#e8d5b5]" />
+			</label>
+			<label class="block">
+				<span class="overline-label text-paper/60">Elite — {elitePct}% off</span>
+				<input type="range" min="20" max="60" step="1" bind:value={elitePct} class="mt-3 w-full accent-[#e8d5b5]" />
+			</label>
+		</div>
+
+		{#each calcTiers as tier (tier.name)}
+			<div class="mt-8">
+				<div class="flex items-baseline gap-4">
+					<h3 class="text-lg font-semibold">{tier.name}</h3>
+					<span class="font-mono text-manila">−{tier.discount}%</span>
+					<span class="font-mono text-xs text-paper/40">{TIERS.find((t) => t.name === tier.name)?.qualification}</span>
+				</div>
+				<div class="mt-3 overflow-x-auto">
+					<table class="w-full min-w-[480px] text-left text-sm">
+						<thead>
+							<tr class="border-b border-paper/15 font-mono text-[0.6875rem] tracking-widest text-paper/50 uppercase">
+								<th class="py-2 pr-4 font-medium">Product</th>
+								<th class="py-2 pr-4 font-medium">MSRP</th>
+								<th class="py-2 pr-4 font-medium">Partner pays</th>
+								<th class="py-2 font-medium">Partner margin</th>
+							</tr>
+						</thead>
+						<tbody class="font-mono">
+							{#each MSRP as row (row.sku)}
+								{@const cost = partnerCost(row.price, tier.discount)}
+								<tr class="border-b border-paper/10">
+									<td class="py-2 pr-4 font-sans">{row.sku}</td>
+									<td class="py-2 pr-4 text-paper/60">${row.price}</td>
+									<td class="py-2 pr-4">{money(cost)}</td>
+									<td class="py-2 text-manila">+{money(partnerMargin(row.price, tier.discount))}</td>
+								</tr>
+							{/each}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		{/each}
+		<p class="mt-6 text-xs leading-relaxed text-paper/50">
+			Trade scales with order size — no minimum to qualify for any tier. Landed cost is an estimate here; the
+			real number gets confirmed live with iotty.
+		</p>
 	</div>
 </section>
 

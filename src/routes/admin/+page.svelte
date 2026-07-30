@@ -7,9 +7,9 @@
 	// ===== Margin presenter =====
 	// landed cost as % of MSRP — adjustable; Bryan can give real numbers live
 	let landedPct: number = $state(30);
-	let tradePct: number = $state(25);
-	let proPct: number = $state(35);
-	let elitePct: number = $state(40);
+	let tradePct: number = $state(20);
+	let proPct: number = $state(25);
+	let elitePct: number = $state(35);
 
 	interface TierRow {
 		name: string;
@@ -80,6 +80,7 @@
 			<label class="block">
 				<span class="overline-label text-paper/60">Trade — {tradePct}% off</span>
 				<input type="range" min="10" max="50" step="1" bind:value={tradePct} class="mt-3 w-full accent-[#e8d5b5]" />
+				<span class="mt-1.5 block font-mono text-[0.6875rem] text-paper/40">Real site: 15% &lt;$500 · 20% $500–1k · 25% &gt;$1k</span>
 			</label>
 			<label class="block">
 				<span class="overline-label text-paper/60">Pro — {proPct}% off</span>

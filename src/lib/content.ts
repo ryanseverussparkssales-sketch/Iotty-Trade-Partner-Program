@@ -8,11 +8,17 @@ export const MSRP = [
 	{ sku: 'Dimmer module', price: 27 }
 ] as const;
 
+export const TRADE_SCALE = [
+	{ range: 'Orders under $500', pct: '15%' },
+	{ range: '$500 – $1,000', pct: '20%' },
+	{ range: 'Orders over $1,000', pct: '25%' }
+] as const;
+
 export const TIERS = [
 	{
 		name: 'Trade',
-		discount: '25%',
-		qualification: 'Approved application',
+		discount: '15–25%',
+		qualification: 'By order size — no minimum',
 		perks: [
 			'Directory listing',
 			'Priority email support',
@@ -22,8 +28,8 @@ export const TIERS = [
 	},
 	{
 		name: 'Pro',
-		discount: '35%',
-		qualification: '$5k / rolling 12 months',
+		discount: '25%',
+		qualification: 'Approved application — no minimum',
 		perks: [
 			'Featured directory listing',
 			'Priority phone line',
@@ -33,8 +39,8 @@ export const TIERS = [
 	},
 	{
 		name: 'Elite',
-		discount: '40%',
-		qualification: '$15k / rolling 12 months',
+		discount: '35%',
+		qualification: 'Approved application — no minimum',
 		perks: [
 			'Priority lead routing',
 			'Dedicated rep · Net 30 terms',

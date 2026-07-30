@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { fly } from 'svelte/transition';
-	import { MSRP, TIERS } from '$lib/content';
+	import { MSRP, TIERS, TRADE_SCALE } from '$lib/content';
 	import logoBlack from '$lib/assets/iotty-black.svg';
 	// switchWhite (angled) retired — replaced by model shots
 	import model1gWhite from '$lib/assets/photos/model-1g-white.webp';
@@ -182,7 +182,7 @@
 				of homeowners every day.
 			</p>
 			<p>
-				Founding partners lock <span class="font-medium text-ink">Pro pricing — 35% off MSRP — for 12 months</span>
+				Founding partners lock <span class="font-medium text-ink">Pro pricing — 25% off MSRP — for 12 months</span>
 				regardless of volume, get a listing on the installer directory the day it launches, and get their first
 				glass switch free with the demo kit.
 			</p>
@@ -228,7 +228,7 @@
 						<tr class="bg-ink font-mono text-[0.6875rem] tracking-widest text-paper uppercase">
 							<th class="px-6 py-4 font-medium">Product</th>
 							<th class="px-6 py-4 font-medium">MSRP</th>
-							<th class="px-6 py-4 font-medium">Founding cost −35%</th>
+							<th class="px-6 py-4 font-medium">Founding cost −25%</th>
 							<th class="px-6 py-4 font-medium">Your margin</th>
 						</tr>
 					</thead>
@@ -237,8 +237,8 @@
 							<tr class="border-t border-canvas">
 								<td class="px-6 py-3.5 font-sans font-medium">{row.sku}</td>
 								<td class="px-6 py-3.5 text-pencil">${row.price}</td>
-								<td class="px-6 py-3.5">${(row.price * 0.65).toFixed(2)}</td>
-								<td class="px-6 py-3.5 text-manila-deep">+${(row.price * 0.35).toFixed(2)}</td>
+								<td class="px-6 py-3.5">${(row.price * 0.75).toFixed(2)}</td>
+								<td class="px-6 py-3.5 text-manila-deep">+${(row.price * 0.25).toFixed(2)}</td>
 							</tr>
 						{/each}
 					</tbody>
@@ -275,6 +275,16 @@
 				</div>
 				<p class="overline-label mt-1 {i === 1 ? 'text-paper/50' : 'text-pencil'}">off MSRP</p>
 				<p class="mt-6 font-mono text-xs {i === 1 ? 'text-paper/60' : 'text-pencil'}">{tier.qualification}</p>
+				{#if i === 0}
+					<ul class="mt-4 space-y-1.5 border-t border-canvas pt-4 font-mono text-xs text-pencil">
+						{#each TRADE_SCALE as s (s.range)}
+							<li class="flex items-baseline justify-between gap-3">
+								<span>{s.range}</span>
+								<span class="text-manila-deep">{s.pct}</span>
+							</li>
+						{/each}
+					</ul>
+				{/if}
 				<ul class="mt-6 space-y-3 text-sm {i === 1 ? 'text-paper/80' : 'text-pencil'}">
 					{#each tier.perks as perk (perk)}
 						<li class="flex gap-3">
