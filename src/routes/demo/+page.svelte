@@ -87,6 +87,14 @@
 		database. Fifty new qualified trade contacts enter it every day; partners come out the other end
 		listed on the map. Here's what's under it.
 	</p>
+
+	<!-- jump nav -->
+	<nav class="mt-10 flex flex-wrap gap-2 border-t border-canvas pt-6" aria-label="Jump to section">
+		<a href="#database" class="frame-motif bg-canvas/40 px-4 py-2 text-xs font-medium tracking-wide text-pencil transition-colors hover:bg-canvas hover:text-ink">01 — The database</a>
+		<a href="#cycle" class="frame-motif bg-canvas/40 px-4 py-2 text-xs font-medium tracking-wide text-pencil transition-colors hover:bg-canvas hover:text-ink">02 — The cycle</a>
+		<a href="#knowledge-base" class="frame-motif bg-canvas/40 px-4 py-2 text-xs font-medium tracking-wide text-pencil transition-colors hover:bg-canvas hover:text-ink">03 — Knowledge base</a>
+		<a href="#collateral" class="frame-motif bg-canvas/40 px-4 py-2 text-xs font-medium tracking-wide text-pencil transition-colors hover:bg-canvas hover:text-ink">04 — In the field</a>
+	</nav>
 </section>
 
 <!-- ============ VIDEO FRAME ============ -->
@@ -118,7 +126,7 @@
 </section>
 
 <!-- ============ THE DATABASE ============ -->
-<section class="border-y border-canvas bg-canvas/40">
+<section id="database" class="scroll-mt-20 border-y border-canvas bg-canvas/40">
 	<div class="mx-auto max-w-6xl px-6 py-20">
 		<p class="overline-label text-pencil">01 — The database</p>
 		<h2 class="mt-5 max-w-2xl text-3xl font-semibold tracking-tight">
@@ -155,11 +163,17 @@
 		<p class="mt-6 font-mono text-xs text-pencil">
 			Postgres · row-level security · public site reads nothing it shouldn't
 		</p>
+		<a
+			href="/directory"
+			class="frame-motif mt-8 inline-flex items-center gap-2 bg-ink px-6 py-3 text-sm font-medium text-paper transition-colors hover:bg-manila-deep hover:text-ink"
+		>
+			See the live directory →
+		</a>
 	</div>
 </section>
 
 <!-- ============ THE CYCLE ============ -->
-<section class="mx-auto max-w-6xl px-6 py-20">
+<section id="cycle" class="scroll-mt-20 mx-auto max-w-6xl px-6 py-20">
 	<p class="overline-label text-pencil">02 — The cycle</p>
 	<h2 class="mt-5 max-w-2xl text-3xl font-semibold tracking-tight">
 		Prospecting and outreach, running in a loop.
@@ -227,7 +241,7 @@
 </section>
 
 <!-- ============ KNOWLEDGE BASE ============ -->
-<section class="border-y border-canvas bg-canvas/40">
+<section id="knowledge-base" class="scroll-mt-20 border-y border-canvas bg-canvas/40">
 	<div class="mx-auto max-w-6xl px-6 py-20">
 		<div class="flex flex-wrap items-baseline justify-between gap-4">
 			<div>
@@ -255,7 +269,7 @@
 </section>
 
 <!-- ============ PHYSICAL COLLATERAL ============ -->
-<section class="mx-auto max-w-6xl px-6 py-20">
+<section id="collateral" class="scroll-mt-20 mx-auto max-w-6xl px-6 py-20">
 	<p class="overline-label text-pencil">04 — In the partner's hands</p>
 	<h2 class="mt-5 max-w-2xl text-3xl font-semibold tracking-tight">
 		The glass does the selling. These put it in front of the client.
