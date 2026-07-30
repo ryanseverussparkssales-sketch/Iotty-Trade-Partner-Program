@@ -61,24 +61,30 @@
 		{/if}
 	</div>
 
-	<!-- ===== Funnel ===== -->
-	{#if data.stats}
-		<div class="mt-10 grid grid-cols-2 gap-px overflow-hidden border border-canvas bg-canvas sm:grid-cols-3 lg:grid-cols-6">
-			{#each funnelOrder as st (st)}
-				<div class="bg-paper p-5">
-					<p class="overline-label text-pencil">{st}</p>
-					<p class="mt-2 font-mono text-3xl">{data.stats.by_status[st] ?? 0}</p>
-				</div>
-			{/each}
-		</div>
-		<p class="mt-3 font-mono text-xs text-pencil">
-			Founding slots taken: {data.stats.founding_taken} / 50
-		</p>
-	{/if}
-
-	<!-- ===== Margin presenter ===== -->
-	<div class="frame-motif mt-14 bg-ink p-8 text-paper sm:p-10">
+	<!-- ===== Live operations panel: pipeline + margin presenter, one surface ===== -->
+	<div class="frame-motif mt-10 bg-ink p-8 text-paper sm:p-10">
 		<div class="flex flex-wrap items-baseline justify-between gap-4">
+			<div>
+				<p class="overline-label text-manila">Live operations</p>
+				<h2 class="mt-1 text-2xl font-semibold">Pipeline</h2>
+			</div>
+			{#if data.stats}
+				<p class="font-mono text-xs text-paper/50">Founding slots taken: {data.stats.founding_taken} / 50</p>
+			{/if}
+		</div>
+
+		{#if data.stats}
+			<div class="mt-6 grid grid-cols-2 gap-px overflow-hidden border border-paper/15 bg-paper/15 sm:grid-cols-3 lg:grid-cols-6">
+				{#each funnelOrder as st (st)}
+					<div class="bg-ink p-5">
+						<p class="overline-label text-paper/50">{st}</p>
+						<p class="mt-2 font-mono text-3xl text-manila">{data.stats.by_status[st] ?? 0}</p>
+					</div>
+				{/each}
+			</div>
+		{/if}
+
+		<div class="mt-12 flex flex-wrap items-baseline justify-between gap-4 border-t border-paper/15 pt-10">
 			<h2 class="text-2xl font-semibold">Margin presenter</h2>
 			<p class="overline-label text-manila">Live tier modeling</p>
 		</div>
@@ -158,6 +164,57 @@
 			iotty margin = partner price − landed cost. Red means the tier sells below landed cost at that setting.
 			Type in Bryan's real per-unit numbers during the call — everything updates live.
 		</p>
+
+		<div class="mt-12 flex flex-wrap items-baseline justify-between gap-4 border-t border-paper/15 pt-10">
+			<div>
+				<h2 class="text-2xl font-semibold">Harvest sessions</h2>
+				<p class="mt-1 text-sm text-paper/60">Live prospecting runs — iotty campaigns only</p>
+			</div>
+			<p class="overline-label text-manila">{data.harvestSessions.length} sessions</p>
+		</div>
+
+		{#if data.harvestSessions.length}
+			<div class="mt-6 overflow-x-auto">
+				<table class="w-full min-w-[820px] text-left text-sm">
+					<thead>
+						<tr class="border-b border-paper/15 font-mono text-[0.6875rem] tracking-widest text-paper/50 uppercase">
+							<th class="py-2 pr-4 font-medium">Session</th>
+							<th class="py-2 pr-4 font-medium">Origin</th>
+							<th class="py-2 pr-4 font-medium">Area</th>
+							<th class="py-2 pr-4 font-medium">Verticals</th>
+							<th class="py-2 pr-4 font-medium">Leads</th>
+							<th class="py-2 pr-4 font-medium">Cost</th>
+							<th class="py-2 font-medium">Status</th>
+						</tr>
+					</thead>
+					<tbody class="font-mono text-xs">
+						{#each data.harvestSessions as s (s.title + s.created_at)}
+							<tr class="border-b border-paper/10">
+								<td class="py-2.5 pr-4 font-sans text-sm text-paper">{s.title}</td>
+								<td class="py-2.5 pr-4 text-paper/60">{s.origin}</td>
+								<td class="py-2.5 pr-4 text-paper/60">{s.area}</td>
+								<td class="py-2.5 pr-4 text-paper/50">{(s.verticals ?? []).join(', ')}</td>
+								<td class="py-2.5 pr-4 text-manila">{s.leads_found}/{s.max_leads}</td>
+								<td class="py-2.5 pr-4 text-paper/60">${Number(s.cost_spent).toFixed(2)}/${Number(s.max_cost).toFixed(2)}</td>
+								<td class="py-2.5">
+									<span
+										class="rounded-sm px-2 py-0.5 text-[0.6875rem] uppercase tracking-wide {s.status === 'done'
+											? 'bg-manila/20 text-manila'
+											: s.status === 'running'
+												? 'bg-paper/15 text-paper'
+												: 'bg-paper/10 text-paper/50'}"
+									>
+										{s.status}
+									</span>
+								</td>
+							</tr>
+						{/each}
+					</tbody>
+				</table>
+			</div>
+		{:else}
+			<p class="mt-6 text-sm text-paper/50">No harvest sessions recorded yet.</p>
+		{/if}
 	</div>
 
 	<!-- ===== Recent applications ===== -->
