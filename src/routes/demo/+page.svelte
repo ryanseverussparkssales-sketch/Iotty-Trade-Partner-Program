@@ -3,7 +3,7 @@
 	import closerPoster from '$lib/assets/video/closer-poster.webp';
 
 	// Drop the YouTube video ID here (the part after v= or youtu.be/) to go live.
-	const YOUTUBE_ID = '';
+	const YOUTUBE_ID = 'yztD6529Cr8';
 
 	// ===== the outreach cycle, drawn as a ring =====
 	const CYCLE = [
