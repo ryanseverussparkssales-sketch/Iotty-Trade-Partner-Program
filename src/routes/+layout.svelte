@@ -36,7 +36,7 @@
 				href="/apply"
 				class="frame-motif bg-ink px-5 py-2 text-sm font-medium text-paper transition-colors hover:bg-manila-deep hover:text-ink"
 			>
-				Apply — {data.foundingRemaining} of {data.foundingCap} slots left
+				Apply — founding spots limited
 			</a>
 		</nav>
 	</div>

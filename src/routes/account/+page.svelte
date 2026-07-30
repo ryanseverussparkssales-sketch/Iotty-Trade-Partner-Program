@@ -50,13 +50,11 @@
 			</div>
 			<div class="frame-motif bg-paper p-8">
 				<p class="overline-label text-pencil">Your pricing</p>
-				<p class="mt-3 font-mono text-4xl text-manila-deep">
-					{data.partner.founding || ['approved', 'activated', 'ordering'].includes(data.partner.status) ? '35%' : '25%'}
-				</p>
+				<p class="mt-3 font-mono text-4xl text-manila-deep">25%</p>
 				<p class="mt-1 text-sm text-pencil">off MSRP{data.partner.founding ? ' — Pro tier, locked 12 months' : ''}</p>
 				<p class="mt-4 text-sm leading-relaxed text-pencil">
-					2-gang: <span class="font-mono">$84.50</span> · 4-gang: <span class="font-mono">$130.00</span> · dimmer
-					module <span class="font-mono">$17.55</span>
+					2-gang: <span class="font-mono">$97.50</span> · 4-gang: <span class="font-mono">$150.00</span> · dimmer
+					module <span class="font-mono">$20.25</span>
 				</p>
 			</div>
 			<div class="frame-motif bg-paper p-8">

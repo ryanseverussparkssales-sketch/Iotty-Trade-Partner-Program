@@ -24,11 +24,11 @@
 				<span class="text-manila-deep">No fees, no minimums.</span>
 			</h1>
 			<p class="mt-6 max-w-sm text-[0.95rem] leading-relaxed text-pencil">
-				A real person reviews every application and calls you within 48 hours. Founding partners lock 35% off MSRP
+				A real person reviews every application and calls you within 48 hours. Founding partners lock 25% off MSRP
 				for 12 months, get their first switch free with the demo kit, and go on the installer directory at launch.
 			</p>
 			<div class="frame-motif mt-10 inline-block bg-ink px-6 py-4 font-mono text-sm text-paper">
-				<span class="text-manila">{data.foundingRemaining}</span> / {data.foundingCap} founding slots remaining
+				Founding spots limited
 			</div>
 		</div>
 

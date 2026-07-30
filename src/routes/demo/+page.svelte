@@ -1,6 +1,8 @@
 <script lang="ts">
 	import closerVideo from '$lib/assets/video/iotty-closer.mp4';
 	import closerPoster from '$lib/assets/video/closer-poster.webp';
+	import demoBoardImg from '$lib/assets/photos/demo-board.webp';
+	import designBookletImg from '$lib/assets/photos/design-booklet.webp';
 	import { MSRP, TIERS } from '$lib/content';
 
 	// Drop the YouTube video ID here (the part after v= or youtu.be/) to go live.
@@ -405,8 +407,8 @@
 
 	<div class="mt-12 grid gap-8 lg:grid-cols-2">
 		<figure>
-			<div class="flex aspect-[4/3] items-center justify-center border border-dashed border-canvas bg-canvas/30">
-				<p class="overline-label text-pencil/60">Demo board mockup</p>
+			<div class="frame-motif overflow-hidden bg-canvas/30">
+				<img src={demoBoardImg} alt="iotty field demo kit — a live, powered switch on a carryable acrylic board" class="aspect-[4/3] w-full object-cover" />
 			</div>
 			<figcaption class="mt-4">
 				<p class="font-medium">The demo board</p>
@@ -414,12 +416,13 @@
 					Live switches on a carryable board — powered, backlit, dimming. What an integrator sets on the
 					kitchen island at the design meeting, and what an electrician keeps in the truck.
 				</p>
+				<p class="mt-2 font-mono text-[0.6875rem] tracking-wide text-pencil/50">Concept mockup — final kit pending fabrication</p>
 			</figcaption>
 		</figure>
 
 		<figure>
-			<div class="flex aspect-[4/3] items-center justify-center border border-dashed border-canvas bg-canvas/30">
-				<p class="overline-label text-pencil/60">Design booklet mockup</p>
+			<div class="frame-motif overflow-hidden bg-canvas/30">
+				<img src={designBookletImg} alt="iotty Trade Partners founding partner program booklet cover" class="aspect-[4/3] w-full object-cover" />
 			</div>
 			<figcaption class="mt-4">
 				<p class="font-medium">The design booklet</p>
@@ -427,6 +430,7 @@
 					Finishes, gang configurations, and room photography in a piece a designer will actually leave on
 					a client's table — the mood-board argument for the whole line.
 				</p>
+				<p class="mt-2 font-mono text-[0.6875rem] tracking-wide text-pencil/50">Concept mockup — content pending sign-off</p>
 			</figcaption>
 		</figure>
 	</div>

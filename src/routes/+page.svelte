@@ -141,9 +141,7 @@
 				>
 					Claim a founding slot
 				</a>
-				<p class="font-mono text-sm text-paper/60">
-					<span class="text-manila">{data.foundingRemaining}</span> / {data.foundingCap} remaining
-				</p>
+				<p class="font-mono text-sm text-paper/60">Founding spots limited</p>
 			</div>
 		</div>
 		<figure class="frame-motif-light overflow-hidden">
@@ -330,7 +328,7 @@
 			href="/apply"
 			class="frame-motif-light mt-10 inline-block bg-paper px-10 py-4 text-sm font-semibold text-ink transition-colors hover:bg-manila"
 		>
-			Apply in 5 minutes — {data.foundingRemaining} slots left
+			Apply in 5 minutes — founding spots limited
 		</a>
 	</div>
 </section>
