@@ -60,6 +60,12 @@
 					Use the email you applied with — your partner profile is matched to it. Not a partner yet?
 					<a href="/apply" class="underline underline-offset-4">Apply in 5 minutes</a>.
 				</p>
+				<p class="border-t border-canvas pt-5 text-xs leading-relaxed text-pencil">
+					Just looking around?
+					<a href="/demo" class="font-medium text-ink underline underline-offset-4 hover:text-manila-deep"
+						>See the system demo</a
+					> — no sign-in needed.
+				</p>
 			</form>
 		{/if}
 	</div>
