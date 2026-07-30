@@ -128,7 +128,7 @@
 		<div>
 			<p class="overline-label text-manila">The trade program · Founding round</p>
 			<h1 class="mt-6 text-5xl leading-[1.05] font-semibold tracking-tight sm:text-6xl">
-				The trade program <span class="text-manila">for the smart glass switch.</span>
+				The trade program <span class="text-manila">for the luxury glass smart light switch.</span>
 			</h1>
 			<p class="mt-8 max-w-xl text-lg leading-relaxed text-paper/70">
 				Italian tempered glass. Backlit touch. No hub. iotty is opening its US trade channel — and holding

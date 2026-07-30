@@ -29,7 +29,6 @@
 		</a>
 		<nav class="flex items-center gap-8">
 			<a href="/#program" class="hidden text-sm text-pencil transition-colors hover:text-ink sm:block">Program</a>
-			<a href="/#math" class="hidden text-sm text-pencil transition-colors hover:text-ink sm:block">The math</a>
 			<a href="/#tiers" class="hidden text-sm text-pencil transition-colors hover:text-ink sm:block">Tiers</a>
 			<a href="/directory" class="hidden text-sm text-pencil transition-colors hover:text-ink sm:block">Directory</a>
 			<a href="/account" class="hidden text-sm text-pencil transition-colors hover:text-ink sm:block">Sign in</a>
