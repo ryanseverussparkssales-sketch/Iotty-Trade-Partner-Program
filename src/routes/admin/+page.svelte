@@ -5,8 +5,10 @@
 	let { data }: { data: PageData } = $props();
 
 	// ===== Margin presenter =====
-	// landed cost as % of MSRP — adjustable; Bryan can give real numbers live
-	let landedPct: number = $state(30);
+	// landed cost is a real dollar amount per SKU — enter Bryan's actual numbers live
+	let landedCost: Record<string, number> = $state(
+		Object.fromEntries(MSRP.map((r) => [r.sku, Math.round(r.price * 0.3 * 100) / 100]))
+	);
 	let tradePct: number = $state(20);
 	let proPct: number = $state(25);
 	let elitePct: number = $state(35);
@@ -26,12 +28,12 @@
 	function partnerCost(msrp: number, discount: number): number {
 		return msrp * (1 - discount / 100);
 	}
-	function iottyMargin(msrp: number, discount: number): number {
-		return partnerCost(msrp, discount) - msrp * (landedPct / 100);
+	function iottyMargin(sku: string, msrp: number, discount: number): number {
+		return partnerCost(msrp, discount) - (landedCost[sku] ?? 0);
 	}
-	function iottyMarginPct(msrp: number, discount: number): number {
+	function iottyMarginPct(sku: string, msrp: number, discount: number): number {
 		const cost = partnerCost(msrp, discount);
-		return cost > 0 ? (iottyMargin(msrp, discount) / cost) * 100 : 0;
+		return cost > 0 ? (iottyMargin(sku, msrp, discount) / cost) * 100 : 0;
 	}
 
 	const funnelOrder = ['prospect', 'contacted', 'applied', 'approved', 'activated', 'ordering'];
@@ -72,11 +74,26 @@
 			<p class="overline-label text-manila">Live tier modeling</p>
 		</div>
 
-		<div class="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-			<label class="block">
-				<span class="overline-label text-paper/60">Landed cost — {landedPct}% of MSRP</span>
-				<input type="range" min="10" max="60" step="1" bind:value={landedPct} class="mt-3 w-full accent-[#e8d5b5]" />
-			</label>
+		<p class="mt-8 overline-label text-paper/60">Landed cost per unit — enter Bryan's real numbers</p>
+		<div class="mt-3 grid gap-6 sm:grid-cols-3 lg:grid-cols-5">
+			{#each MSRP as row (row.sku)}
+				<label class="block">
+					<span class="font-mono text-xs text-paper/60">{row.sku}</span>
+					<span class="mt-2 flex items-center gap-1.5 border-b border-paper/25 pb-1">
+						<span class="text-paper/40">$</span>
+						<input
+							type="number"
+							step="0.01"
+							min="0"
+							bind:value={landedCost[row.sku]}
+							class="w-full bg-transparent font-mono text-lg text-paper focus:outline-none"
+						/>
+					</span>
+				</label>
+			{/each}
+		</div>
+
+		<div class="mt-10 grid gap-8 sm:grid-cols-3">
 			<label class="block">
 				<span class="overline-label text-paper/60">Trade — {tradePct}% off</span>
 				<input type="range" min="10" max="50" step="1" bind:value={tradePct} class="mt-3 w-full accent-[#e8d5b5]" />
@@ -113,14 +130,14 @@
 						<tbody class="font-mono">
 							{#each MSRP as row (row.sku)}
 								{@const cost = partnerCost(row.price, tier.discount)}
-								{@const im = iottyMargin(row.price, tier.discount)}
+								{@const im = iottyMargin(row.sku, row.price, tier.discount)}
 								<tr class="border-b border-paper/10">
 									<td class="py-2 pr-4 font-sans">{row.sku}</td>
 									<td class="py-2 pr-4 text-paper/60">${row.price}</td>
 									<td class="py-2 pr-4">{money(cost)}</td>
 									<td class="py-2 pr-4 text-manila">+{money(row.price - cost)}</td>
 									<td class="py-2 pr-4 {im < 0 ? 'text-red-400' : ''}">{money(im)}</td>
-									<td class="py-2 {im < 0 ? 'text-red-400' : 'text-paper/70'}">{iottyMarginPct(row.price, tier.discount).toFixed(0)}%</td>
+									<td class="py-2 {im < 0 ? 'text-red-400' : 'text-paper/70'}">{iottyMarginPct(row.sku, row.price, tier.discount).toFixed(0)}%</td>
 								</tr>
 							{/each}
 						</tbody>
@@ -130,7 +147,7 @@
 		{/each}
 		<p class="mt-6 text-xs leading-relaxed text-paper/50">
 			iotty margin = partner price − landed cost. Red means the tier sells below landed cost at that setting.
-			Slide landed cost to Bryan's real number during the call — everything updates live.
+			Type in Bryan's real per-unit numbers during the call — everything updates live.
 		</p>
 	</div>
 

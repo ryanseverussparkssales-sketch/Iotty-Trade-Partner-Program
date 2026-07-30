@@ -6,8 +6,10 @@
 	// Drop the YouTube video ID here (the part after v= or youtu.be/) to go live.
 	const YOUTUBE_ID = 'yztD6529Cr8';
 
-	// ===== tier & cost calculator (public-safe mirror of the admin margin presenter) =====
-	let landedPct: number = $state(30);
+	// ===== tier & cost calculator (mirrors the admin margin presenter) =====
+	let landedCost: Record<string, number> = $state(
+		Object.fromEntries(MSRP.map((r) => [r.sku, Math.round(r.price * 0.3 * 100) / 100]))
+	);
 	let tradePct: number = $state(20);
 	let proPct: number = $state(25);
 	let elitePct: number = $state(35);
@@ -24,6 +26,13 @@
 	}
 	function partnerMargin(msrp: number, discount: number): number {
 		return msrp - partnerCost(msrp, discount);
+	}
+	function iottyMargin(sku: string, msrp: number, discount: number): number {
+		return partnerCost(msrp, discount) - (landedCost[sku] ?? 0);
+	}
+	function iottyMarginPct(sku: string, msrp: number, discount: number): number {
+		const cost = partnerCost(msrp, discount);
+		return cost > 0 ? (iottyMargin(sku, msrp, discount) / cost) * 100 : 0;
 	}
 
 	// ===== the outreach cycle, drawn as a ring =====
@@ -204,11 +213,26 @@
 	</p>
 
 	<div class="frame-motif mt-10 bg-ink p-8 text-paper sm:p-10">
-		<div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-			<label class="block">
-				<span class="overline-label text-paper/60">Landed cost — {landedPct}% of MSRP</span>
-				<input type="range" min="10" max="60" step="1" bind:value={landedPct} class="mt-3 w-full accent-[#e8d5b5]" />
-			</label>
+		<p class="overline-label text-paper/60">Landed cost per unit</p>
+		<div class="mt-3 grid gap-6 sm:grid-cols-3 lg:grid-cols-5">
+			{#each MSRP as row (row.sku)}
+				<label class="block">
+					<span class="font-mono text-xs text-paper/60">{row.sku}</span>
+					<span class="mt-2 flex items-center gap-1.5 border-b border-paper/25 pb-1">
+						<span class="text-paper/40">$</span>
+						<input
+							type="number"
+							step="0.01"
+							min="0"
+							bind:value={landedCost[row.sku]}
+							class="w-full bg-transparent font-mono text-lg text-paper focus:outline-none"
+						/>
+					</span>
+				</label>
+			{/each}
+		</div>
+
+		<div class="mt-10 grid gap-8 sm:grid-cols-3">
 			<label class="block">
 				<span class="overline-label text-paper/60">Trade — {tradePct}% off</span>
 				<input type="range" min="10" max="50" step="1" bind:value={tradePct} class="mt-3 w-full accent-[#e8d5b5]" />
@@ -232,23 +256,28 @@
 					<span class="font-mono text-xs text-paper/40">{TIERS.find((t) => t.name === tier.name)?.qualification}</span>
 				</div>
 				<div class="mt-3 overflow-x-auto">
-					<table class="w-full min-w-[480px] text-left text-sm">
+					<table class="w-full min-w-[560px] text-left text-sm">
 						<thead>
 							<tr class="border-b border-paper/15 font-mono text-[0.6875rem] tracking-widest text-paper/50 uppercase">
 								<th class="py-2 pr-4 font-medium">Product</th>
 								<th class="py-2 pr-4 font-medium">MSRP</th>
 								<th class="py-2 pr-4 font-medium">Partner pays</th>
-								<th class="py-2 font-medium">Partner margin</th>
+								<th class="py-2 pr-4 font-medium">Partner margin</th>
+								<th class="py-2 pr-4 font-medium">iotty margin</th>
+								<th class="py-2 font-medium">iotty %</th>
 							</tr>
 						</thead>
 						<tbody class="font-mono">
 							{#each MSRP as row (row.sku)}
 								{@const cost = partnerCost(row.price, tier.discount)}
+								{@const im = iottyMargin(row.sku, row.price, tier.discount)}
 								<tr class="border-b border-paper/10">
 									<td class="py-2 pr-4 font-sans">{row.sku}</td>
 									<td class="py-2 pr-4 text-paper/60">${row.price}</td>
 									<td class="py-2 pr-4">{money(cost)}</td>
-									<td class="py-2 text-manila">+{money(partnerMargin(row.price, tier.discount))}</td>
+									<td class="py-2 pr-4 text-manila">+{money(partnerMargin(row.price, tier.discount))}</td>
+									<td class="py-2 pr-4 {im < 0 ? 'text-red-400' : ''}">{money(im)}</td>
+									<td class="py-2 {im < 0 ? 'text-red-400' : 'text-paper/70'}">{iottyMarginPct(row.sku, row.price, tier.discount).toFixed(0)}%</td>
 								</tr>
 							{/each}
 						</tbody>
@@ -257,8 +286,8 @@
 			</div>
 		{/each}
 		<p class="mt-6 text-xs leading-relaxed text-paper/50">
-			Trade scales with order size — no minimum to qualify for any tier. Landed cost is an estimate here; the
-			real number gets confirmed live with iotty.
+			Trade scales with order size — no minimum to qualify for any tier. iotty margin = partner price − landed
+			cost; red means that tier sells below landed cost at these numbers.
 		</p>
 	</div>
 </section>
