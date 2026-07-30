@@ -20,8 +20,12 @@ export const handle: Handle = async ({ event, resolve }) => {
 	} = await event.locals.supabase.auth.getUser();
 	event.locals.user = user;
 
+	// /admin is intentionally open to anonymous visitors right now (linked from the
+	// demo lander) — its own load function serves a redacted, counts-only view to
+	// non-admins and the full view to a signed-in admin. Only /account (a partner's
+	// private profile) needs a session to view at all.
 	const path = event.url.pathname;
-	if ((path.startsWith('/account') || path.startsWith('/admin')) && !user) {
+	if (path.startsWith('/account') && !user) {
 		redirect(303, `/login?next=${encodeURIComponent(path)}`);
 	}
 
