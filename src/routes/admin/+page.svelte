@@ -46,10 +46,19 @@
 <section class="mx-auto max-w-6xl px-6 py-16">
 	<div class="flex flex-wrap items-center justify-between gap-4">
 		<div>
-			<p class="overline-label text-pencil">Admin</p>
+			<p class="overline-label text-pencil">{data.isAdmin ? 'Admin' : 'Live preview'}</p>
 			<h1 class="mt-3 text-3xl font-semibold tracking-tight">Program dashboard</h1>
+			{#if !data.isAdmin}
+				<p class="mt-2 max-w-xl text-sm text-pencil">
+					Real, live pipeline counts — no company names shown here. Sign in as an admin for the full view.
+				</p>
+			{/if}
 		</div>
-		<a href="/account" class="text-sm text-pencil underline underline-offset-4 hover:text-ink">Back to profile</a>
+		{#if data.isAdmin}
+			<a href="/account" class="text-sm text-pencil underline underline-offset-4 hover:text-ink">Back to profile</a>
+		{:else}
+			<a href="/demo" class="text-sm text-pencil underline underline-offset-4 hover:text-ink">Back to the demo</a>
+		{/if}
 	</div>
 
 	<!-- ===== Funnel ===== -->

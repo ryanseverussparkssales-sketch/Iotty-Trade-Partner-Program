@@ -194,12 +194,20 @@
 		<p class="mt-6 font-mono text-xs text-pencil">
 			Postgres · row-level security · public site reads nothing it shouldn't
 		</p>
-		<a
-			href="/directory"
-			class="frame-motif mt-8 inline-flex items-center gap-2 bg-ink px-6 py-3 text-sm font-medium text-paper transition-colors hover:bg-manila-deep hover:text-ink"
-		>
-			See the live directory →
-		</a>
+		<div class="mt-8 flex flex-wrap gap-4">
+			<a
+				href="/directory"
+				class="frame-motif inline-flex items-center gap-2 bg-ink px-6 py-3 text-sm font-medium text-paper transition-colors hover:bg-manila-deep hover:text-ink"
+			>
+				See the live directory →
+			</a>
+			<a
+				href="/admin"
+				class="frame-motif inline-flex items-center gap-2 border border-ink bg-paper px-6 py-3 text-sm font-medium text-ink transition-colors hover:bg-ink hover:text-paper"
+			>
+				See the live program dashboard →
+			</a>
+		</div>
 	</div>
 </section>
 
