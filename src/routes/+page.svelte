@@ -111,7 +111,7 @@
 		<div>
 			<h1 class="text-5xl leading-[1.05] font-semibold tracking-tight sm:text-6xl">
 				Enroll Today.<br />
-				Trade Discounts.<br />
+				Earn Trade Discounts.<br />
 				<span class="text-manila">Pre-Order Starter Packs.</span>
 			</h1>
 			<div class="mt-10 flex flex-wrap items-center gap-6">
@@ -161,12 +161,22 @@
 		</div>
 	</div>
 
-	<div class="mt-16 grid items-stretch gap-6 lg:grid-cols-[1.4fr_1fr]">
-		<div class="frame-motif flex flex-col justify-center bg-canvas/30 p-10 sm:p-14">
+	<div class="mt-16 grid items-stretch gap-6 lg:grid-cols-3">
+		<figure class="frame-motif hidden overflow-hidden lg:block">
+			<img
+				src={model4gBlack}
+				alt="iotty 4-gang smart switch in black tempered glass on a limestone wall at dusk"
+				class="h-full w-full object-cover"
+				width="1000"
+				height="1254"
+				loading="lazy"
+			/>
+		</figure>
+		<div class="frame-motif flex flex-col justify-center bg-canvas/30 p-10">
 			<p class="overline-label text-pencil">We're excited to work with</p>
 			<ul class="mt-6 space-y-3">
 				{#each trades as trade (trade)}
-					<li class="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{trade}</li>
+					<li class="text-xl font-semibold tracking-tight text-ink sm:text-2xl">{trade}</li>
 				{/each}
 			</ul>
 		</div>
