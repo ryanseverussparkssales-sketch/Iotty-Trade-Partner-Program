@@ -71,6 +71,27 @@
 		{ n: '03', t: 'Demo kit ships', d: 'Half price, first switch free. Install it in your own place this weekend.' },
 		{ n: '04', t: 'You’re on the map', d: 'Directory listing live. Order per-project at your tier price, forever.' }
 	];
+
+	const starterPacks = [
+		{
+			name: 'Starter',
+			value: '500',
+			contents: ['1× 4-gang', '1× 3-gang', '1× 2-gang', '1× dimmer module'],
+			blurb: 'Enough to show a kitchen, a bath, and an entry in the same walkthrough.'
+		},
+		{
+			name: 'Builder',
+			value: '1,000',
+			contents: ['2× 4-gang', '2× 3-gang', '2× 2-gang', '1× dimmer module'],
+			blurb: 'Stock two rooms per job site — the pack most partners reorder first.'
+		},
+		{
+			name: 'Showcase',
+			value: '1,800',
+			contents: ['5× 4-gang', '3× 3-gang', '2× 2-gang', '1× dimmer module'],
+			blurb: 'A full showroom wall — every configuration, ready to demo on day one.'
+		}
+	];
 </script>
 
 <!-- ============ MOTIVA SEQUENCE — iotty × ____ (auto) ============ -->
@@ -207,6 +228,37 @@
 			{/each}
 		</div>
 	</div>
+</section>
+
+<!-- ============ PRE-ORDER STARTER PACKS ============ -->
+<section id="starter-packs" class="mx-auto max-w-6xl px-6 py-24">
+	<p class="overline-label text-pencil">Pre-order starter packs</p>
+	<h2 class="mt-6 text-3xl font-semibold tracking-tight">Walk in with product in hand.</h2>
+	<div class="mt-12 grid gap-6 lg:grid-cols-3">
+		{#each starterPacks as pack (pack.name)}
+			<div class="frame-motif flex flex-col bg-paper p-8">
+				<p class="overline-label text-manila-deep">{pack.name}</p>
+				<p class="mt-3 font-mono text-3xl text-ink">${pack.value}</p>
+				<p class="mt-1 font-mono text-xs text-pencil">list value</p>
+				<ul class="mt-6 space-y-1.5 font-mono text-sm text-pencil">
+					{#each pack.contents as item (item)}
+						<li>{item}</li>
+					{/each}
+				</ul>
+				<p class="mt-6 flex-1 text-sm leading-relaxed text-pencil">{pack.blurb}</p>
+				<a
+					href="mailto:trade@iottysmarthome.com?subject=Pre-order — {pack.name} pack"
+					class="frame-motif mt-8 inline-block bg-ink px-6 py-3 text-center text-sm font-semibold text-paper transition-colors hover:bg-manila-deep hover:text-ink"
+				>
+					Pre-order the {pack.name}
+				</a>
+			</div>
+		{/each}
+	</div>
+	<p class="mt-8 text-xs leading-relaxed text-pencil">
+		Priced at your tier — Trade partners get order-size pricing, Founding and Elite partners lock a flat rate. See
+		<a href="#tiers" class="underline underline-offset-2">tiers &amp; pricing</a>.
+	</p>
 </section>
 
 <!-- ============ THE MATH ============ -->
