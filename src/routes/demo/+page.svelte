@@ -6,7 +6,7 @@
 	import { MSRP, TIERS } from '$lib/content';
 
 	// Drop the YouTube video ID here (the part after v= or youtu.be/) to go live.
-	const YOUTUBE_ID = 'yztD6529Cr8';
+	const YOUTUBE_ID = 'lRJMsDXx64Q';
 
 	// ===== tier & cost calculator (mirrors the admin margin presenter) =====
 	let landedCost: Record<string, number> = $state(

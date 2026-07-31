@@ -76,19 +76,19 @@
 		{
 			name: 'Starter',
 			value: '500',
-			contents: ['1× 4-gang', '1× 3-gang', '1× 2-gang', '1× dimmer module'],
-			blurb: 'Enough to show a kitchen, a bath, and an entry in the same walkthrough.'
+			contents: ['1× 4-gang', '1× 2-gang', '2× 1-gang', '1× dimmer module'],
+			blurb: 'One statement piece plus single switches for the hallway and the closet.'
 		},
 		{
 			name: 'Builder',
 			value: '1,000',
-			contents: ['2× 4-gang', '2× 3-gang', '2× 2-gang', '1× dimmer module'],
-			blurb: 'Stock two rooms per job site — the pack most partners reorder first.'
+			contents: ['2× 4-gang', '2× 2-gang', '3× 1-gang', '1× dimmer module'],
+			blurb: 'A real assortment across every room size — the pack most partners reorder first.'
 		},
 		{
 			name: 'Showcase',
 			value: '1,800',
-			contents: ['5× 4-gang', '3× 3-gang', '2× 2-gang', '1× dimmer module'],
+			contents: ['3× 4-gang', '2× 3-gang', '3× 2-gang', '4× 1-gang', '2× dimmer modules'],
 			blurb: 'A full showroom wall — every configuration, ready to demo on day one.'
 		}
 	];
