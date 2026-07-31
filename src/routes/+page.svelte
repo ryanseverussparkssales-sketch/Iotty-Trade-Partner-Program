@@ -63,24 +63,7 @@
 		};
 	});
 
-	const segments = [
-		{
-			label: 'Electricians',
-			line: 'Same box, same 15 minutes of wire time — 4× the ticket. A glass upgrade on every reno and panel job.'
-		},
-		{
-			label: 'Custom integrators',
-			line: 'The switch that finally matches the rest of a $200k system. Glass, backlit, no hub, no programming labor.'
-		},
-		{
-			label: 'Builders',
-			line: 'Two switches in the model home kitchen is the cheapest wow on your options sheet.'
-		},
-		{
-			label: 'Designers',
-			line: 'The one smart-home product that belongs on a mood board. Trade pricing; your electrician handles install.'
-		}
-	];
+	const trades = ['Designers', 'Electricians', 'Custom Integrators', 'IT Professionals', 'Builders', 'Remodelers'];
 
 	const steps = [
 		{ n: '01', t: 'Apply', d: '5 minutes. Business name, trade, license or EIN. No fees, no minimums.' },
@@ -126,14 +109,11 @@
 
 	<div class="relative mx-auto grid max-w-6xl items-center gap-14 px-6 pt-20 pb-24 lg:grid-cols-[1.05fr_1fr]">
 		<div>
-			<p class="overline-label text-manila">The trade program · Founding round</p>
-			<h1 class="mt-6 text-5xl leading-[1.05] font-semibold tracking-tight sm:text-6xl">
-				The trade program <span class="text-manila">for The Luxury Smart Switch.</span>
+			<h1 class="text-5xl leading-[1.05] font-semibold tracking-tight sm:text-6xl">
+				Enroll Today.<br />
+				Trade Discounts.<br />
+				<span class="text-manila">Pre-Order Starter Packs.</span>
 			</h1>
-			<p class="mt-8 max-w-xl text-lg leading-relaxed text-paper/70">
-				Enroll today for trade discounts and direct support from the team that builds it — no distributor, no
-				hub, no waiting.
-			</p>
 			<div class="mt-10 flex flex-wrap items-center gap-6">
 				<a
 					href="/apply"
@@ -170,8 +150,9 @@
 <section id="program" class="mx-auto max-w-6xl px-6 py-24">
 	<div class="grid gap-12 lg:grid-cols-2">
 		<h2 class="text-4xl leading-[1.1] font-semibold tracking-tight">
-			The switch your clients show&nbsp;off.
-			<span class="text-manila-deep">The program that pays you to install it.</span>
+			Luxury isn't plastic.<br />
+			It's artisanal Italian glass.<br />
+			<span class="text-manila-deep">Now, that's a smart switch.</span>
 		</h2>
 		<div class="flex items-end text-[0.95rem] leading-relaxed text-pencil">
 			<p class="overline-label text-pencil">
@@ -180,24 +161,25 @@
 		</div>
 	</div>
 
-	<div class="mt-16 grid items-stretch gap-6 lg:grid-cols-[1fr_1.6fr]">
+	<div class="mt-16 grid items-stretch gap-6 lg:grid-cols-[1.4fr_1fr]">
+		<div class="frame-motif flex flex-col justify-center bg-canvas/30 p-10 sm:p-14">
+			<p class="overline-label text-pencil">We're excited to work with</p>
+			<ul class="mt-6 space-y-3">
+				{#each trades as trade (trade)}
+					<li class="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">{trade}</li>
+				{/each}
+			</ul>
+		</div>
 		<figure class="frame-motif hidden overflow-hidden lg:block">
 			<img
-				src={model4gBlack}
-				alt="iotty 4-gang smart switch in black tempered glass on a limestone wall at dusk"
+				src={model4gWhite}
+				alt="iotty 4-gang smart switch in white tempered glass"
 				class="h-full w-full object-cover"
 				width="1000"
 				height="1254"
 				loading="lazy"
 			/>
 		</figure>
-		<div class="grid gap-px overflow-hidden border border-canvas bg-canvas sm:grid-cols-2">
-			{#each segments as seg (seg.label)}
-				<div class="flex items-center bg-paper p-8">
-					<p class="text-2xl font-semibold tracking-tight text-ink">{seg.label}</p>
-				</div>
-			{/each}
-		</div>
 	</div>
 </section>
 
