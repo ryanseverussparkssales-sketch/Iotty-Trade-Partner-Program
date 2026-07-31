@@ -173,18 +173,8 @@
 			The switch your clients show&nbsp;off.
 			<span class="text-manila-deep">The program that pays you to install it.</span>
 		</h2>
-		<div class="space-y-5 text-[0.95rem] leading-relaxed text-pencil">
-			<p>
-				The trade decides what goes in walls. So instead of spending everything on ads, iotty is putting margin
-				where it belongs: with the electricians, integrators, builders, and designers who put the product in front
-				of homeowners every day.
-			</p>
-			<p>
-				Founding partners lock <span class="font-medium text-ink">Pro pricing — 25% off MSRP — for 12 months</span>
-				regardless of volume, get a listing on the installer directory the day it launches, and get their first
-				glass switch free with the demo kit.
-			</p>
-			<p class="overline-label pt-2 text-pencil">
+		<div class="flex items-end text-[0.95rem] leading-relaxed text-pencil">
+			<p class="overline-label text-pencil">
 				Alexa · Google Home · Siri Shortcuts · SmartThings — UL #E527071 &amp; TUV · no hub · 2.4GHz Wi-Fi
 			</p>
 		</div>
@@ -203,9 +193,8 @@
 		</figure>
 		<div class="grid gap-px overflow-hidden border border-canvas bg-canvas sm:grid-cols-2">
 			{#each segments as seg (seg.label)}
-				<div class="bg-paper p-8">
-					<p class="overline-label text-manila-deep">{seg.label}</p>
-					<p class="mt-4 text-sm leading-relaxed text-pencil">{seg.line}</p>
+				<div class="flex items-center bg-paper p-8">
+					<p class="text-2xl font-semibold tracking-tight text-ink">{seg.label}</p>
 				</div>
 			{/each}
 		</div>
