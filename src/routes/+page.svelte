@@ -128,11 +128,11 @@
 		<div>
 			<p class="overline-label text-manila">The trade program · Founding round</p>
 			<h1 class="mt-6 text-5xl leading-[1.05] font-semibold tracking-tight sm:text-6xl">
-				The trade program <span class="text-manila">for the luxury glass smart light switch.</span>
+				The trade program <span class="text-manila">for The Luxury Smart Switch.</span>
 			</h1>
 			<p class="mt-8 max-w-xl text-lg leading-relaxed text-paper/70">
-				Italian tempered glass. Backlit touch. No hub. iotty is opening its US trade channel — and holding
-				<span class="font-mono text-manila">{data.foundingCap}</span> founding slots for the professionals who get there first.
+				Enroll today for trade discounts and direct support from the team that builds it — no distributor, no
+				hub, no waiting.
 			</p>
 			<div class="mt-10 flex flex-wrap items-center gap-6">
 				<a
