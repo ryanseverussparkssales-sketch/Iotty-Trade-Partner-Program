@@ -95,9 +95,9 @@
 </script>
 
 <!-- ============ MOTIVA SEQUENCE — iotty × ____ (auto) ============ -->
-<section class="flex min-h-[38vh] flex-col items-center justify-center bg-paper px-6 py-14">
-	<!-- × sits at dead center; logo right-aligns to it, word grows rightward — nothing shifts -->
-	<h2 class="grid w-full grid-cols-[1fr_auto_1fr] items-center gap-x-6 text-6xl font-semibold tracking-tight sm:text-8xl">
+<section class="flex min-h-[22vh] flex-col items-center justify-center bg-paper px-6 py-8">
+	<!-- × sits left-of-center; logo right-aligns to it, word grows rightward with room to spare -->
+	<h2 class="grid w-full grid-cols-[0.55fr_auto_1.45fr] items-center gap-x-6 text-6xl font-semibold tracking-tight sm:text-8xl">
 		<span class="flex justify-end">
 			<img src={logoBlack} alt="iotty" class="h-12 w-auto sm:h-20" width="111" height="55" />
 		</span>
