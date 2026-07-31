@@ -183,6 +183,22 @@
 	</div>
 </section>
 
+<!-- ============ HOW IT WORKS ============ -->
+<section class="border-y border-canvas bg-canvas/40">
+	<div class="mx-auto max-w-6xl px-6 py-24">
+		<p class="overline-label text-pencil">How it works</p>
+		<div class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+			{#each steps as step (step.n)}
+				<div>
+					<p class="font-mono text-sm text-manila-deep">{step.n}</p>
+					<h3 class="mt-3 text-lg font-semibold">{step.t}</h3>
+					<p class="mt-2 text-sm leading-relaxed text-pencil">{step.d}</p>
+				</div>
+			{/each}
+		</div>
+	</div>
+</section>
+
 <!-- ============ THE MATH ============ -->
 <section id="math" class="border-y border-canvas bg-canvas/40">
 	<div class="mx-auto max-w-6xl px-6 py-24">
@@ -269,22 +285,6 @@
 				{/if}
 			</div>
 		{/each}
-	</div>
-</section>
-
-<!-- ============ HOW IT WORKS ============ -->
-<section class="border-y border-canvas bg-canvas/40">
-	<div class="mx-auto max-w-6xl px-6 py-24">
-		<p class="overline-label text-pencil">How it works</p>
-		<div class="mt-12 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-			{#each steps as step (step.n)}
-				<div>
-					<p class="font-mono text-sm text-manila-deep">{step.n}</p>
-					<h3 class="mt-3 text-lg font-semibold">{step.t}</h3>
-					<p class="mt-2 text-sm leading-relaxed text-pencil">{step.d}</p>
-				</div>
-			{/each}
-		</div>
 	</div>
 </section>
 

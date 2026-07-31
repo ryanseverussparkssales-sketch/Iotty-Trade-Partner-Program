@@ -72,11 +72,14 @@
 		{#if ['approved', 'activated', 'ordering'].includes(data.partner.status)}
 			<div class="frame-motif mt-6 flex flex-wrap items-center justify-between gap-6 bg-canvas/40 p-8">
 				<div>
-					<p class="text-lg font-semibold">Next step: the demo kit</p>
-					<p class="mt-1 text-sm text-pencil">2-gang + 1-gang + dimmer at 50% off — first switch free for founding partners.</p>
+					<p class="text-lg font-semibold">Place your first order</p>
+					<p class="mt-1 text-sm text-pencil">
+						Choose from one of our starter bundles to show off to your clients, or place your first client
+						order, all at 25% off. Not compatible with consumer discounts.
+					</p>
 				</div>
-				<a href="mailto:trade@iottysmarthome.com?subject=Demo kit order" class="frame-motif bg-ink px-6 py-3 text-sm font-semibold text-paper transition-colors hover:bg-manila-deep hover:text-ink">
-					Order demo kit
+				<a href="mailto:trade@iottysmarthome.com?subject=First order" class="frame-motif bg-ink px-6 py-3 text-sm font-semibold text-paper transition-colors hover:bg-manila-deep hover:text-ink">
+					Place an order
 				</a>
 			</div>
 		{/if}
