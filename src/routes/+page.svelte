@@ -103,7 +103,7 @@
 		<article class="frame-motif flex flex-col p-8">
 			<p class="overline-label text-manila-deep">02 · Book a call</p>
 			<h3 class="mt-4 text-2xl font-semibold tracking-tight">
-				15 minutes with Ryan. A free switch.
+				15 minutes with our trade team. A free switch.
 			</h3>
 			<p class="mt-4 text-sm leading-relaxed text-pencil">
 				Book a quick call, tell us about your jobs, and we'll send you an iotty switch to
@@ -146,7 +146,7 @@
 				<li>2.4GHz Wi-Fi · UL #E527071 &amp; TÜV certified</li>
 			</ul>
 			<p class="mt-8 text-sm text-pencil">
-				Questions? <a href="mailto:ryan@iottysmarthome.com" class="font-medium text-ink underline underline-offset-4">ryan@iottysmarthome.com</a>
+				Questions? <a href="mailto:trade@iottysmarthome.com" class="font-medium text-ink underline underline-offset-4">trade@iottysmarthome.com</a>
 				· <a href="tel:+15512664688" class="font-medium text-ink underline underline-offset-4">(551) 266-4688</a>
 			</p>
 		</div>
