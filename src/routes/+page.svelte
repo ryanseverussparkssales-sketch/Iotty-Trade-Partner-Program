@@ -5,7 +5,7 @@
 
 	// -- The two offers. Edit here only. --
 	const SIGNUP_URL = 'https://forms.gle/TNRuBjJ4HUF82Mcg8'; // Google Form — trade program sign-up
-	const BOOKING_URL = 'https://calendar.app.google/7We1JXyiXm59qYuT6'; // TODO: swap for the 15-min booking link
+	const BOOKING_URL = 'https://calendar.app.google/ZVqpTgEoREX7qJdz9'; // "Speak With Ryan @ iotty smart home" — 15 min
 	const DISCOUNT = '20%';
 </script>
 
