@@ -17,28 +17,22 @@
 	<title>iotty Trade Partners — the trade program for the glass switch</title>
 	<meta
 		name="description"
-		content="Trade pricing, an installer directory, and founding-partner status for electricians, integrators, builders, and designers. 50 founding slots nationally."
+		content="Trade pricing on the iotty glass smart switch for electricians, integrators, builders, and designers."
 	/>
 </svelte:head>
 
 <header class="sticky top-0 z-50 border-b border-canvas bg-paper/90 backdrop-blur">
-	<div class="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+	<div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
 		<a href="/" class="flex items-center gap-3">
 			<img src={logoBlack} alt="iotty" class="h-5 w-auto" width="111" height="55" />
 			<span class="overline-label text-pencil">Trade Partners</span>
 		</a>
-		<nav class="flex items-center gap-8">
-			<a href="/#program" class="hidden text-sm text-pencil transition-colors hover:text-ink sm:block">Program</a>
-			<a href="/#tiers" class="hidden text-sm text-pencil transition-colors hover:text-ink sm:block">Tiers</a>
-			<a href="/directory" class="hidden text-sm text-pencil transition-colors hover:text-ink sm:block">Directory</a>
-			<a href="/account" class="hidden text-sm text-pencil transition-colors hover:text-ink sm:block">Sign in</a>
-			<a
-				href="/apply"
-				class="frame-motif bg-ink px-5 py-2 text-sm font-medium text-paper transition-colors hover:bg-manila-deep hover:text-ink"
-			>
-				Apply — founding spots limited
-			</a>
-		</nav>
+		<a
+			href="/#offers"
+			class="frame-motif bg-ink px-4 py-2 text-sm font-medium text-paper transition-colors hover:bg-manila-deep hover:text-ink sm:px-5"
+		>
+			Get trade pricing
+		</a>
 	</div>
 </header>
 
@@ -52,16 +46,14 @@
 				<span class="overline-label text-manila">Trade Partners</span>
 			</p>
 			<p class="mt-3 max-w-xs text-sm leading-relaxed text-paper/60">
-				The Italian tempered-glass smart switch — and the program that pays professionals to install it.
+				The Italian tempered-glass smart switch — with trade pricing for the pros who install it.
 			</p>
 		</div>
 		<div class="text-sm">
 			<p class="overline-label mb-4 text-manila">Program</p>
 			<ul class="space-y-2 text-paper/70">
-				<li><a class="transition-colors hover:text-paper" href="/#tiers">Tiers &amp; pricing</a></li>
-				<li><a class="transition-colors hover:text-paper" href="/#math">Partner economics</a></li>
-				<li><a class="transition-colors hover:text-paper" href="/directory">Find an installer</a></li>
-				<li><a class="transition-colors hover:text-paper" href="/apply">Apply</a></li>
+				<li><a class="transition-colors hover:text-paper" href="/#offers">Trade pricing</a></li>
+				<li><a class="transition-colors hover:text-paper" href="/#offers">Book a call</a></li>
 			</ul>
 		</div>
 		<div class="text-sm">

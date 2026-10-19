@@ -1,107 +1,55 @@
 <script lang="ts">
 	import switchWhiteHero from '$lib/assets/photos/switch-white-hero.webp';
-	import model4gWhite from '$lib/assets/photos/model-4g-white.webp';
+	import model1gWhite from '$lib/assets/photos/model-1g-white.webp';
 	import model4gBlack from '$lib/assets/photos/model-4g-black.webp';
 
-	// -- Klaviyo (client-side, no backend needed) --
-	const KLAVIYO_PUBLIC_KEY = 'KBnFmt'; // IOTTY, LLC
-	const KLAVIYO_LIST_ID = 'TqBaPp'; // "Trade Outreach Prospects"
-
-	let name = $state('');
-	let company = $state('');
-	let email = $state('');
-	let status: 'idle' | 'loading' | 'success' | 'error' = $state('idle');
-	let errorMessage = $state('');
-
-	async function joinProgram(e: SubmitEvent) {
-		e.preventDefault();
-		if (!email.trim()) return;
-		status = 'loading';
-		errorMessage = '';
-
-		try {
-			const res = await fetch(`https://a.klaviyo.com/client/subscriptions?company_id=${KLAVIYO_PUBLIC_KEY}`, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					revision: '2024-10-15'
-				},
-				body: JSON.stringify({
-					data: {
-						type: 'subscription',
-						attributes: {
-							profile: {
-								data: {
-									type: 'profile',
-									attributes: {
-										email: email.trim().toLowerCase(),
-										first_name: name.trim() || undefined,
-										properties: {
-											Company: company.trim() || undefined,
-											Source: 'Trade Program — Pre-Launch Page'
-										}
-									}
-								}
-							}
-						},
-						relationships: {
-							list: { data: { type: 'list', id: KLAVIYO_LIST_ID } }
-						}
-					}
-				})
-			});
-
-			if (res.ok) {
-				status = 'success';
-			} else {
-				status = 'error';
-				errorMessage = 'Something went wrong — email trade@iottysmarthome.com and we’ll add you directly.';
-			}
-		} catch {
-			status = 'error';
-			errorMessage = 'Something went wrong — email trade@iottysmarthome.com and we’ll add you directly.';
-		}
-	}
+	// -- The two offers. Edit here only. --
+	const SIGNUP_URL = 'https://forms.gle/TNRuBjJ4HUF82Mcg8'; // Google Form — trade program sign-up
+	const BOOKING_URL = 'https://calendar.app.google/7We1JXyiXm59qYuT6'; // TODO: swap for the 15-min booking link
+	const DISCOUNT = '20%';
 </script>
 
 <svelte:head>
-	<title>iotty Trade Partners — Join the Program</title>
+	<title>iotty Trade Program — Trade Pricing &amp; a Free Switch</title>
 	<meta
 		name="description"
-		content="Join the iotty Trade Partner Program before September and save 20% on every order. Early members get first placement on the partner directory."
+		content="Join the initial iotty trade program for {DISCOUNT} off trade orders, or book a 15-minute call and get a free iotty smart switch."
 	/>
 </svelte:head>
 
 <!-- ============ HERO ============ -->
-<section class="relative overflow-hidden bg-ink text-paper">
-	<div class="relative mx-auto grid max-w-6xl items-center gap-14 px-6 pt-20 pb-24 lg:grid-cols-[1.05fr_1fr]">
+<section class="bg-ink text-paper">
+	<div class="mx-auto grid max-w-6xl items-center gap-12 px-4 pt-16 pb-20 sm:px-6 lg:grid-cols-[1.1fr_1fr] lg:pt-20 lg:pb-24">
 		<div>
-			<p class="overline-label text-manila">Pre-launch · Founding round</p>
-			<h1 class="mt-6 text-5xl leading-[1.05] font-semibold tracking-tight sm:text-6xl">
-				Join before September.<br />
-				<span class="text-manila">Save 20% on every order.</span>
+			<p class="overline-label text-manila">iotty Trade Program · Initial round</p>
+			<h1 class="mt-6 text-4xl leading-[1.05] font-semibold tracking-tight sm:text-6xl">
+				The glass switch your clients ask about.<br />
+				<span class="text-manila">Trade pricing for the pros who install it.</span>
 			</h1>
 			<p class="mt-6 max-w-md text-[0.95rem] leading-relaxed text-paper/70">
-				Sign up for a pre-launch preview of the iotty Trade Partner Program. It's free, takes
-				thirty seconds, and locks in 20% off every order placed before September.
+				For electricians, integrators, builders, and designers. Two ways in — pick one or both.
 			</p>
-			<div class="mt-10 flex flex-wrap items-center gap-6">
+			<div class="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
 				<a
-					href="#join"
-					class="frame-motif-light bg-paper px-8 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-manila"
+					href={SIGNUP_URL}
+					target="_blank"
+					rel="noopener"
+					class="frame-motif-light bg-paper px-7 py-3.5 text-center text-sm font-semibold text-ink transition-colors hover:bg-manila"
 				>
-					Get More Info
+					Sign up — get {DISCOUNT} off
 				</a>
 				<a
-					href="/apply"
-					class="text-sm font-medium text-paper underline decoration-paper/40 underline-offset-4 hover:decoration-paper"
+					href={BOOKING_URL}
+					target="_blank"
+					rel="noopener"
+					class="frame-motif-light px-7 py-3.5 text-center text-sm font-semibold text-paper transition-colors hover:bg-paper/10"
 				>
-					Ready to join the program →
+					Book 15 min — get a free switch
 				</a>
 			</div>
 		</div>
 		<figure class="frame-motif-light overflow-hidden">
-			<div class="aspect-[4/5] max-h-[62vh] w-full">
+			<div class="aspect-[4/5] max-h-[60vh] w-full">
 				<img
 					src={switchWhiteHero}
 					alt="iotty smart switch in white tempered glass, backlit on a wall"
@@ -111,149 +59,109 @@
 					loading="eager"
 				/>
 			</div>
-			<figcaption
-				class="border-t border-paper/15 px-5 py-3 font-mono text-[0.6875rem] tracking-widest text-paper/50 uppercase"
-			>
-				Alexa · Google Home · Siri · SmartThings — no hub required
+			<figcaption class="border-t border-paper/15 px-5 py-3 font-mono text-[0.6875rem] tracking-widest text-paper/50 uppercase">
+				Alexa · Google Home · Siri · SmartThings — no hub
 			</figcaption>
 		</figure>
 	</div>
 </section>
 
-<!-- ============ WHY JOIN EARLY ============ -->
-<section class="mx-auto max-w-6xl px-6 py-24">
-	<p class="overline-label text-pencil">Why join before launch</p>
+<!-- ============ TWO OFFERS ============ -->
+<section id="offers" class="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-24">
+	<p class="overline-label text-pencil">Two ways in</p>
 	<h2 class="mt-6 max-w-2xl text-3xl font-semibold tracking-tight">
-		Early members get first pick — literally.
+		Lock in trade pricing, or see the switch for yourself.
 	</h2>
 
-	<div class="mt-12 grid gap-6 sm:grid-cols-2">
-		<div class="frame-motif p-8">
-			<p class="overline-label text-manila-deep">Pre-launch preview</p>
+	<div class="mt-12 grid gap-6 md:grid-cols-2">
+		<!-- Offer 1 -->
+		<article class="frame-motif flex flex-col p-8">
+			<p class="overline-label text-manila-deep">01 · Sign up</p>
+			<h3 class="mt-4 text-2xl font-semibold tracking-tight">
+				Join the initial trade program. Save {DISCOUNT}.
+			</h3>
 			<p class="mt-4 text-sm leading-relaxed text-pencil">
-				See the full trade program, pricing, and terms before we open it up to everyone else.
+				Early partners get {DISCOUNT} off trade orders. Two-minute form — no commitment, no
+				minimums to sign up.
 			</p>
-		</div>
-		<div class="frame-motif p-8">
-			<p class="overline-label text-manila-deep">Partner directory</p>
+			<ul class="mt-6 space-y-2 text-sm text-ink">
+				<li>— {DISCOUNT} off as an initial-round partner</li>
+				<li>— First look at full trade pricing and terms</li>
+				<li>— Direct line to the iotty trade team</li>
+			</ul>
+			<div class="mt-auto pt-8"><a
+				href={SIGNUP_URL}
+				target="_blank"
+				rel="noopener"
+				class="frame-motif block bg-ink px-6 py-3.5 text-center text-sm font-semibold text-paper transition-colors hover:bg-manila-deep hover:text-ink"
+			>
+				Sign up for the trade program →
+			</a></div>
+		</article>
+
+		<!-- Offer 2 -->
+		<article class="frame-motif flex flex-col p-8">
+			<p class="overline-label text-manila-deep">02 · Book a call</p>
+			<h3 class="mt-4 text-2xl font-semibold tracking-tight">
+				15 minutes with Ryan. A free switch.
+			</h3>
 			<p class="mt-4 text-sm leading-relaxed text-pencil">
-				The first companies to join get first placement on the iotty partner directory when it goes live.
+				Book a quick call, tell us about your jobs, and we'll send you an iotty switch to
+				install, demo, or hand a client.
 			</p>
-		</div>
-	</div>
-
-	<div class="mt-6 grid gap-6 sm:grid-cols-2">
-		<figure class="frame-motif overflow-hidden">
-			<img
-				src={model4gWhite}
-				alt="iotty 4-gang smart switch in white tempered glass"
-				class="h-full w-full object-cover"
-				width="1000"
-				height="1254"
-				loading="lazy"
-			/>
-			<figcaption class="border-t border-canvas px-5 py-3 font-mono text-[0.6875rem] tracking-widest text-pencil uppercase">
-				White finish
-			</figcaption>
-		</figure>
-		<figure class="frame-motif overflow-hidden">
-			<img
-				src={model4gBlack}
-				alt="iotty 4-gang smart switch in black tempered glass"
-				class="h-full w-full object-cover"
-				width="1000"
-				height="1254"
-				loading="lazy"
-			/>
-			<figcaption class="border-t border-canvas px-5 py-3 font-mono text-[0.6875rem] tracking-widest text-pencil uppercase">
-				Black finish
-			</figcaption>
-		</figure>
-	</div>
-
-	<p class="mt-10 max-w-2xl text-sm leading-relaxed text-pencil">
-		Italian tempered-glass smart switches. Works with Alexa, Google Home, Siri Shortcuts, and
-		SmartThings — no hub required. UL #E527071 &amp; TÜV certified, 2.4GHz Wi-Fi.
-	</p>
-</section>
-
-<!-- ============ JOIN FORM ============ -->
-<section id="join" class="border-y border-canvas bg-canvas/40">
-	<div class="mx-auto max-w-xl px-6 py-24 text-center">
-		<p class="overline-label text-pencil">20% off · orders placed before September</p>
-		<h2 class="mt-6 text-3xl font-semibold tracking-tight">Get More Info</h2>
-		<p class="mt-4 text-sm leading-relaxed text-pencil">
-			Leave your details and we'll send the pre-launch preview as soon as it's ready.
-		</p>
-		<p class="mt-3 text-sm text-pencil">
-			Ready to join the program now?
-			<a href="/apply" class="font-medium text-ink underline underline-offset-4">Full application →</a>
-		</p>
-
-		{#if status === 'success'}
-			<div class="frame-motif mt-10 bg-paper p-8">
-				<p class="overline-label text-manila-deep">You're in</p>
-				<p class="mt-3 text-sm leading-relaxed text-pencil">
-					Watch your inbox for the pre-launch preview. Ready to join the program now instead?
-					<a href="/apply" class="font-medium text-ink underline underline-offset-4">Full application →</a>
-				</p>
-			</div>
-		{:else}
-			<form onsubmit={joinProgram} class="mt-10 space-y-4 text-left">
-				<div>
-					<label for="name" class="overline-label text-pencil">Name</label>
-					<input
-						id="name"
-						type="text"
-						bind:value={name}
-						class="mt-2 w-full border-canvas bg-paper px-4 py-3 text-sm focus:border-ink focus:ring-ink"
-						placeholder="Jane Rivera"
-					/>
-				</div>
-				<div>
-					<label for="company" class="overline-label text-pencil">Company</label>
-					<input
-						id="company"
-						type="text"
-						bind:value={company}
-						class="mt-2 w-full border-canvas bg-paper px-4 py-3 text-sm focus:border-ink focus:ring-ink"
-						placeholder="Rivera Electric"
-					/>
-				</div>
-				<div>
-					<label for="email" class="overline-label text-pencil">Email</label>
-					<input
-						id="email"
-						type="email"
-						required
-						bind:value={email}
-						class="mt-2 w-full border-canvas bg-paper px-4 py-3 text-sm focus:border-ink focus:ring-ink"
-						placeholder="jane@riveraelectric.com"
-					/>
-				</div>
-
-				{#if status === 'error'}
-					<p class="text-sm text-red-700">{errorMessage}</p>
-				{/if}
-
-				<button
-					type="submit"
-					disabled={status === 'loading'}
-					class="frame-motif w-full bg-ink px-6 py-3.5 text-sm font-semibold text-paper transition-colors hover:bg-manila-deep hover:text-ink disabled:opacity-50"
-				>
-					{status === 'loading' ? 'Sending…' : 'Get More Info'}
-				</button>
-			</form>
-		{/if}
+			<ul class="mt-6 space-y-2 text-sm text-ink">
+				<li>— 15 minutes, on your schedule</li>
+				<li>— A real switch in your hands, not a brochure</li>
+				<li>— Trade pricing walkthrough included</li>
+			</ul>
+			<div class="mt-auto pt-8"><a
+				href={BOOKING_URL}
+				target="_blank"
+				rel="noopener"
+				class="frame-motif block bg-ink px-6 py-3.5 text-center text-sm font-semibold text-paper transition-colors hover:bg-manila-deep hover:text-ink"
+			>
+				Book a 15-minute call →
+			</a></div>
+		</article>
 	</div>
 </section>
 
-<!-- ============ FOOTER ADMIN LINK ============ -->
-<div class="mx-auto max-w-6xl px-6 py-6 text-right">
-	<a
-		href="https://iotty-trade-partner-program.vercel.app/admin"
-		class="font-mono text-[0.6875rem] tracking-widest text-pencil/50 uppercase hover:text-pencil"
-	>
-		Admin →
-	</a>
-</div>
+<!-- ============ PRODUCT ============ -->
+<section class="border-y border-canvas bg-canvas/40">
+	<div class="mx-auto grid max-w-6xl items-center gap-10 px-4 py-20 sm:px-6 md:grid-cols-2">
+		<div class="grid grid-cols-2 gap-4">
+			<figure class="frame-motif overflow-hidden bg-paper">
+				<img src={model1gWhite} alt="iotty 1-gang smart switch, white glass" class="h-full w-full object-cover" width="1000" height="1254" loading="lazy" />
+			</figure>
+			<figure class="frame-motif overflow-hidden bg-paper">
+				<img src={model4gBlack} alt="iotty 4-gang smart switch, black glass" class="h-full w-full object-cover" width="1000" height="1254" loading="lazy" />
+			</figure>
+		</div>
+		<div>
+			<p class="overline-label text-pencil">The product</p>
+			<h2 class="mt-6 text-3xl font-semibold tracking-tight">Italian tempered glass. Standard install.</h2>
+			<ul class="mt-6 space-y-3 text-sm leading-relaxed text-pencil">
+				<li>1–4 gang, white or black glass, backlit touch</li>
+				<li>Alexa, Google Home, Siri Shortcuts, SmartThings — no hub required</li>
+				<li>2.4GHz Wi-Fi · UL #E527071 &amp; TÜV certified</li>
+			</ul>
+			<p class="mt-8 text-sm text-pencil">
+				Questions? <a href="mailto:ryan@iottysmarthome.com" class="font-medium text-ink underline underline-offset-4">ryan@iottysmarthome.com</a>
+				· <a href="tel:+15512664688" class="font-medium text-ink underline underline-offset-4">(551) 266-4688</a>
+			</p>
+		</div>
+	</div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section class="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6">
+	<h2 class="text-3xl font-semibold tracking-tight">Pick your way in.</h2>
+	<div class="mt-8 flex flex-col justify-center gap-4 sm:flex-row">
+		<a href={SIGNUP_URL} target="_blank" rel="noopener" class="frame-motif bg-ink px-7 py-3.5 text-sm font-semibold text-paper transition-colors hover:bg-manila-deep hover:text-ink">
+			Sign up — {DISCOUNT} off
+		</a>
+		<a href={BOOKING_URL} target="_blank" rel="noopener" class="frame-motif px-7 py-3.5 text-sm font-semibold text-ink transition-colors hover:bg-canvas">
+			Book 15 min — free switch
+		</a>
+	</div>
+</section>
