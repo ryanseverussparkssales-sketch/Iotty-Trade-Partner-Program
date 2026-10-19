@@ -64,7 +64,7 @@ export const actions: Actions = {
 		if (!saved && !dealId) {
 			return fail(500, {
 				values: v,
-				error: 'Something broke on our end. Email trade@iottysmarthome.com and we’ll lock in your discount.'
+				error: 'Something broke on our end. Email ryan@iottysmarthome.com and we’ll lock in your discount.'
 			});
 		}
 		return { success: true };

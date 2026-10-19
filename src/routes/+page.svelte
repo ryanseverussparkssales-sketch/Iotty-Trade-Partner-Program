@@ -71,7 +71,7 @@
 				/>
 			</div>
 			<figcaption class="border-t border-paper/15 px-5 py-3 font-mono text-[0.6875rem] tracking-widest text-paper/50 uppercase">
-				Alexa · Google Home · Siri · SmartThings — no hub
+				Alexa · Google Home · Siri Shortcuts · SmartThings — no hub
 			</figcaption>
 		</figure>
 	</div>
@@ -250,14 +250,15 @@
 		</div>
 		<div>
 			<p class="overline-label text-pencil">The product</p>
-			<h2 class="mt-6 text-3xl font-semibold tracking-tight">Italian tempered glass. Standard install.</h2>
+			<h2 class="mt-6 text-3xl font-semibold tracking-tight">Italian tempered glass. Ten-minute install.</h2>
 			<ul class="mt-6 space-y-3 text-sm leading-relaxed text-pencil">
-				<li>1–4 gang, white or black glass, backlit touch</li>
+				<li>1–4 gang, white or black glass, customizable backlit touch</li>
+				<li>Fits standard US electrical boxes · add-on dimmer module per switch · multi-way supported</li>
 				<li>Alexa, Google Home, Siri Shortcuts, SmartThings — no hub required</li>
 				<li>2.4GHz Wi-Fi · UL #E527071 &amp; TÜV certified</li>
 			</ul>
 			<p class="mt-8 text-sm text-pencil">
-				Questions? <a href="mailto:trade@iottysmarthome.com" class="font-medium text-ink underline underline-offset-4">trade@iottysmarthome.com</a>
+				Questions? <a href="mailto:ryan@iottysmarthome.com" class="font-medium text-ink underline underline-offset-4">ryan@iottysmarthome.com</a>
 				· <a href="tel:+15512664688" class="font-medium text-ink underline underline-offset-4">(551) 266-4688</a>
 			</p>
 		</div>

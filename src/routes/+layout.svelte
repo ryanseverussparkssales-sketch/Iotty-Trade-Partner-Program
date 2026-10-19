@@ -60,7 +60,7 @@
 			<p class="overline-label mb-4 text-manila">iotty</p>
 			<ul class="space-y-2 text-paper/70">
 				<li><a class="transition-colors hover:text-paper" href="https://iottysmarthome.com" rel="external">iottysmarthome.com</a></li>
-				<li><a class="transition-colors hover:text-paper" href="mailto:trade@iottysmarthome.com">trade@iottysmarthome.com</a></li>
+				<li><a class="transition-colors hover:text-paper" href="mailto:ryan@iottysmarthome.com">ryan@iottysmarthome.com</a></li>
 			</ul>
 		</div>
 	</div>
